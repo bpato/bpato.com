@@ -1,0 +1,42 @@
+---
+import HeaderLinkList from "@/components/Header/HeaderLinkList.astro";
+import { Device } from "@/components/Header/HeaderLink.astro";
+---
+
+<dialog
+  class="bg-theme-grey-medium z-50 max-h-[80vh] w-full max-w-full translate-x-0 transition-discrete duration-300 lg:hidden starting:-translate-x-full [&:not([open])]:-translate-x-full"
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="z-10 overflow-y-auto px-6 py-6 text-white">
+    <div class="flex items-center justify-between">
+      <div class="flex flex-1">
+        <button
+          type="button"
+          id="close-menu-button"
+          class="-m-2.5 cursor-pointer p-2.5 transition-all duration-300 ease-in will-change-transform hover:scale-150"
+        >
+          <span class="sr-only">Cerrar Menú</span>
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="mt-6 space-y-2">
+      <HeaderLinkList device={Device.MOBILE}/>
+    </div>
+  </div>
+</dialog>

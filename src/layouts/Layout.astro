@@ -1,25 +1,26 @@
 ---
+// Supports weights 200-900
+import '@fontsource-variable/nunito';
+import '@fontsource/permanent-marker';
+
 import "./src/styles/global.css"
+
+import Header from "@/components/Header/Header.astro"
+import BackToTop from "@/components/BackToTop.astro"
+
+const { title = 'Blog  | Astro' } = Astro.props
 ---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-white w-screen overflow-x-hidden">
+		<Header />
 		<slot />
+		<BackToTop />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

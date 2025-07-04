@@ -1,0 +1,21 @@
+---
+import HeaderLink from "@/components/Header/HeaderLink.astro"
+import Logo from '@/assets/Logo.astro'
+
+interface IconProp {
+    height: string;
+    width: string;
+}
+
+const iconProp: IconProp = {
+    height: "24pt",
+    width: "24pt",
+};
+
+const { device } = Astro.props
+---
+<HeaderLink href="/" text="" {device}>
+    <Logo { ...iconProp} slot="before-text"/>
+</HeaderLink>
+<HeaderLink text="About" href="/#about" {device} />
+<HeaderLink text="Blog" href="/#blog" {device} />

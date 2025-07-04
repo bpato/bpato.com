@@ -1,0 +1,82 @@
+---
+import HeaderLinkList from "@/components/Header/HeaderLinkList.astro"
+import HeaderHamburguer from "@/components/Header/HeaderHamburguer.astro";
+import HeaderMobile from "@/components/Header/HeaderMobile.astro";
+import { Device } from "@/components/Header/HeaderLink.astro";
+---
+<header class="animate-blur-header fixed top-0 z-60 w-screen">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 pb-9 lg:px-8"
+  >
+    <div class="hidden lg:flex lg:gap-x-12">
+        <HeaderLinkList device={Device.DESKTOP}/>
+    </div>
+    <HeaderHamburguer text="Abrir Menú Principal" />
+  </nav>
+  <HeaderMobile />
+</header>
+
+<div id="backdrop"></div>
+<div data-target class="absolute top-[150px]"></div>
+
+<script>
+  const mobileMenu = document.getElementById("mobile-menu") as HTMLDialogElement
+  const backdrop = document.getElementById("backdrop")
+
+  const toggleMenu = () => {
+    mobileMenu.open ? mobileMenu.close() : mobileMenu.showModal()
+
+    if (mobileMenu.open) {
+      backdrop?.classList.add("visible")
+    } else {
+      backdrop?.classList.remove("visible")
+    }
+  }
+
+  const openMenuButton = document.getElementById("open-menu-button")
+  const closeMenuButton = document.getElementById("close-menu-button")
+
+  // Add event listener to open menu button
+  openMenuButton?.addEventListener("click", toggleMenu)
+
+  // Add event listener to close menu button
+  closeMenuButton?.addEventListener("click", toggleMenu)
+
+  document.addEventListener("click", (event) => {
+    const isClickInsideMenu = mobileMenu.contains(event.target as Node)
+    const isClickInsideButton = openMenuButton?.contains(event.target as Node)
+
+    if (isClickInsideMenu && !isClickInsideButton) {
+      mobileMenu.close()
+      backdrop?.classList.remove("visible")
+    }
+  })
+
+  const mobileItems = mobileMenu.querySelectorAll("a")
+
+  mobileItems?.forEach((item) => item.addEventListener("click", toggleMenu))
+
+</script>
+
+<style>
+  #backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 100;
+  }
+
+  #backdrop.visible {
+    opacity: 1;
+  }
+
+  dialog::backdrop {
+    display: none;
+  }
+</style>
