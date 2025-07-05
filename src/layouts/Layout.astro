@@ -7,6 +7,7 @@ import "./src/styles/global.css"
 
 import Header from "@/components/Header/Header.astro"
 import BackToTop from "@/components/BackToTop.astro"
+import Footer from '@/components/Footer.astro';
 
 const { title = 'Blog  | Astro' } = Astro.props
 ---
@@ -21,6 +22,7 @@ const { title = 'Blog  | Astro' } = Astro.props
 	<body class="bg-white w-screen overflow-x-hidden">
 		<Header />
 		<slot />
+		<Footer />
 		<BackToTop />
 	</body>
 </html>
