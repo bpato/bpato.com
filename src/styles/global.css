@@ -12,8 +12,3 @@
 body {
   font-family: 'Nunito Variable', sans-serif;
 }
-
-.triangle {
-    /* clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 35% 80%, 0% 55%); */
-    clip-path: url(#clip-rounded);
-} 
