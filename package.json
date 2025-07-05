@@ -13,6 +13,7 @@
     "@fontsource-variable/nunito": "^5.2.6",
     "@fontsource/permanent-marker": "^5.2.6",
     "@tailwindcss/vite": "^4.1.11",
+    "@wordpress/url": "^4.26.0",
     "astro": "^5.11.0",
     "tailwindcss": "^4.1.11"
   }
