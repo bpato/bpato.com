@@ -1,14 +1,15 @@
 @import "tailwindcss";
+@plugin "@iconify/tailwind4";
 
 @theme {
-    --color-primary-light: #FFDF6C;
-    --color-theme-black: #202020;
-    --color-theme-grey-dark: #3F3F3F;
-    --color-theme-grey-medium: #707070;
+  --color-primary-light: #ffdf6c;
+  --color-theme-black: #202020;
+  --color-theme-grey-dark: #3f3f3f;
+  --color-theme-grey-medium: #707070;
 
-    --font-special: 'Permanent Marker', cursive;
+  --font-special: "Permanent Marker", cursive;
 }
 
 body {
-  font-family: 'Nunito Variable', sans-serif;
+  font-family: "Nunito Variable", sans-serif;
 }

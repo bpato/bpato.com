@@ -1,0 +1,32 @@
+---
+const { excerpt, title } = Astro.props;
+---
+
+<article
+  class="blog-line my-2 z-0 w-full border-b-1 border-theme-grey-dark border-dashed"
+>
+  <a class="read-more" href="#">
+    <div class="line-body px-5">
+      <div class="flex flex-col w-full">
+        <div class="line-date text-xs text-theme-grey-medium font-medium mb-1">
+          <time>20 Novembre 1992</time>
+        </div>
+        <div class="line-title mb-1 text-white">
+          <h3 class="title text-lg font-semibold">{title}</h3>
+        </div>
+        <div class="divider"></div>
+        <div
+          class="line-excerpt text-theme-grey-medium text-base h-full flex justify-between flex-col md:flex-row mb-2"
+        >
+          <div
+            class="paragraph text-justify leading-normal font-light pr-6"
+            set:html={excerpt}
+          />
+          <div class="text-sm">
+            <p class="tagline">Featured</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>

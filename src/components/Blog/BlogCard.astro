@@ -1,0 +1,41 @@
+---
+const { excerpt, title } = Astro.props;
+---
+
+<article class="blog-card bg-theme-black my-2 z-0">
+  <a class="read-more" href="#">
+    <div class="blog-card-flex flex flex-col-reverse md:flex-row p-6">
+      <div class="card-body text-theme-grey-medium flex-1">
+        <div class="flex flex-col p-6 h-full">
+          <div class="card-date text-xs md:text-sm font-medium mb-6">
+            <time>20 Novembre 1992</time>
+          </div>
+          <div class="card-title mb-2 text-white">
+            <h3 class="title text-lg md:text-4xl font-semibold">{title}</h3>
+          </div>
+          <div class="divider"></div>
+          <div
+            class="card-excerpt text-white text-base md:text-xl min-h-24 h-full flex justify-between flex-col mb-2"
+          >
+            <div
+              class="paragraph text-justify leading-normal font-light"
+              set:html={excerpt}
+            />
+          </div>
+          <div class="text-sm">
+            <p class="tagline">Featured</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="media grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible flex-1"
+      >
+        <img
+          class="object-cover object-center w-full h-50 md:h-96"
+          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_24.png"
+          alt="nature image"
+        />
+      </div>
+    </div>
+  </a>
+</article>

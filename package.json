@@ -16,5 +16,9 @@
     "@wordpress/url": "^4.26.0",
     "astro": "^5.11.0",
     "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.355",
+    "@iconify/tailwind4": "^1.0.6"
   }
 }

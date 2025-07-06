@@ -1,0 +1,20 @@
+---
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
+---
+
+<section
+  class="grid grid-flow-col grid-cols-[20px_auto_20px] grid-rows-1 gap-4 bg-theme-black"
+>
+  <div class="bg-theme-grey-dark"></div>
+  <div class="flex flex-col justify-end mt-56">
+    <div class="px-5">
+      <div class="flex flex-row w-full">
+        <hr class="text-primary-light w-20 mt-7" />
+        <h1 class="font-special text-5xl mx-5">Blog</h1>
+        <hr class="text-primary-light w-full mt-7" />
+      </div>
+      <Breadcrumb />
+    </div>
+  </div>
+  <div class="bg-theme-grey-dark"></div>
+</section>

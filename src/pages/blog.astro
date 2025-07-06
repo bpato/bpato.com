@@ -1,0 +1,135 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageWrapper from "@/components/PageWrapper.astro";
+import { wpquery } from "@/lib/wpQuery";
+import { Post } from "@/lib/wpResources";
+import BlogCard from "@/components/Blog/BlogCard.astro";
+import BlogLine from "@/components/Blog/BlogLine.astro";
+import BlogHeader from "@/components/Blog/BlogHeader.astro";
+
+const { title } = Astro.props;
+
+const { posts } = await wpquery({
+  query: Post.NODES,
+});
+---
+
+<Layout pageTitle={title}>
+  <PageWrapper bgColor="bg-theme-grey-dark">
+    <BlogHeader slot="main-header" />
+    <section
+      class="grid grid-flow-col grid-cols-[20px_auto_20px] grid-rows-1 gap-4 bg-theme-grey-dark"
+    >
+      <div class="bg-theme-black"></div>
+      <div class="pb-6">
+        <div
+          class="bg-primary-light text-theme-grey-dark w-fit ml-11 -mb-18 relative z-20 font-special triangle pt-4 pb-7"
+        >
+          <h2 class="text-2xl mx-5">Entradas recientes</h2>
+        </div>
+        <div class="my-2 flex-wrap flex flex-row">
+          {posts.nodes.map((post: any) => <BlogCard {...post} />)}
+        </div>
+      </div>
+      <div class="bg-theme-black"></div>
+    </section>
+    <section
+      class="grid grid-flow-col grid-cols-[20px_auto_20px] grid-rows-1 bg-theme-grey-dark"
+    >
+      <div class="bg-theme-grey-dark"></div>
+      <div
+        class="bg-theme-black grid grid-cols-1 md:grid-cols-[20%_80%] grid-rows-[100px_80%] md:grid-rows-1 grid-flow-row md:grid-flow-col p-5 lg:p-30"
+      >
+        <div
+          class="border-b-1 md:border-r-1 md:border-b-0 border-theme-grey-dark"
+        >
+          <h2 class="font-special text-4xl mx-5 pt-5 md:pt-0">Feed</h2>
+        </div>
+        <div class="my-2 flex-wrap flex flex-row">
+          {posts.nodes.map((post: any) => <BlogLine {...post} />)}
+        </div>
+      </div>
+      <div class="bg-theme-grey-dark"></div>
+    </section>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .triangle {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+  }
+
+  @media (width >= 48rem /* 768px */) {
+    :global(.blog-card) {
+      flex: 0 0 100%;
+    }
+
+    :global(.blog-card:nth-child(1) .blog-card-flex) {
+      flex-direction: column-reverse;
+    }
+
+    :global(.blog-card:nth-child(1) .blog-card-flex .media img) {
+      height: calc(var(--spacing) * 114);
+    }
+
+    :global(.blog-card:nth-child(n + 2):nth-child(-n + 3)) {
+      flex: 0 0 calc(50% - var(--spacing) * 2);
+    }
+
+    :global(.blog-card:nth-child(n + 2):nth-child(-n + 3) .blog-card-flex) {
+      flex-direction: column-reverse;
+    }
+
+    :global(.blog-card:nth-child(n + 4):nth-child(-n + 6)) {
+      flex: 0 0 calc(33% - var(--spacing) * 2);
+    }
+
+    :global(.blog-card:nth-child(n + 4) .media) {
+      display: none;
+    }
+    :global(.blog-card:nth-child(n + 4) .blog-card-flex) {
+      height: 100%;
+    }
+
+    :global(.blog-card:nth-child(2), .blog-card:nth-child(4)) {
+      margin-left: 0;
+      margin-right: calc(var(--spacing) * 2);
+    }
+    :global(.blog-card:nth-child(3), .blog-card:nth-child(6)) {
+      margin-right: 0;
+      margin-left: calc(var(--spacing) * 2);
+    }
+
+    :global(.blog-card:nth-child(5)) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    :global(.blog-card:nth-child(n + 4):nth-child(-n + 6) .card-title .title) {
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
+    }
+
+    :global(.blog-card:nth-child(n + 4):nth-child(-n + 6) .card-excerpt) {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+  }
+
+  @media (width >= 80rem) {
+    :global(.blog-card:nth-child(n + 4):nth-child(-n + 6) .card-title .title) {
+      font-size: var(--text-4xl) /* 2.25rem = 36px */;
+      line-height: var(
+        --tw-leading,
+        var(--text-4xl--line-height) /* calc(2.5 / 2.25) ≈ 1.1111 */
+      );
+    }
+    :global(.blog-card:nth-child(n + 4):nth-child(-n + 6) .card-excerpt) {
+      font-size: var(--text-xl) /* 1.25rem = 20px */;
+      line-height: var(
+        --tw-leading,
+        var(--text-xl--line-height) /* calc(1.75 / 1.25) ≈ 1.4 */
+      );
+    }
+  }
+</style>

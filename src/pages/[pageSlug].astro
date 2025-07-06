@@ -1,9 +1,9 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
 import { wpquery } from "@/lib/wpQuery";
 import { Page } from "@/lib/wpResources";
+import PageWrapper from "@/components/PageWrapper.astro";
 
 const { slug: pageSlug } = Astro.params;
 const { title, content } = Astro.props;
@@ -22,11 +22,8 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 ---
 
-<Layout>
-  <div
-    class="relative min-w-screen min-h-screen px-5 py-20 sm:px-20 bg-theme-black text-gray-200 triangle"
-  >
-    <Breadcrumb />
+<Layout pageTitle={title}>
+  <PageWrapper classes="px-5 py-20 sm:px-20 triangle">
     <article title={title} class="mx-auto max-w-2xl p-4 sm:pb-25 lg:max-w-6xl">
       <header>
         <h1 class="font-bold text-4xl" set:html={title} />
@@ -57,16 +54,15 @@ export const getStaticPaths = (() => {
       </section>
       <footer class="my-5"></footer>
     </article>
-  </div>
+  </PageWrapper>
 </Layout>
 
 <style>
   @media (min-width: 640px) {
-    .triangle {
+    :global(.triangle) {
       clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 0% 100%);
     }
   }
-
   .wp-page :global(.wp-block-heading) {
     color: var(--color-gray-200);
     font-size: var(--text-2xl);
