@@ -1,0 +1,116 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { wpquery } from "../../lib/wpQuery";
+import { Post } from "../../lib/wpResources";
+import PageWrapper from "../../components/PageWrapper.astro";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
+
+const { postSlug: slug } = Astro.params;
+
+if (!slug) return Astro.redirect("/404");
+
+export const getStaticPaths = (() => {
+  const data = wpquery({
+    query: Post.ALL_SLUG,
+  });
+
+  return data.then(({ posts }) => {
+    return posts.nodes.map((post: any) => ({
+      params: { postSlug: post.slug },
+    }));
+  });
+}) satisfies GetStaticPaths;
+
+const { postBy: post } = await wpquery({
+  query: Post.BY_SLUG,
+  variables: { slug },
+});
+
+const {
+  excerpt,
+  title,
+  content,
+  dateGmt,
+  featuredImage: img = false,
+  tags: { edges: tags },
+} = post;
+
+const date = new Date(dateGmt).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+const sizeBack = img ? "h-[50%] md:h-[65%]" : "h-[360px]";
+---
+
+<Layout pageTitle={title}>
+  <div class=`bg-theme-black absolute w-full ${sizeBack} z-10 triangle`></div>
+  <PageWrapper classes="px-5 py-20 sm:px-20 z-0" bgColor="bg-white">
+    <div slot="main-header" class="z-10 relative">
+      <Breadcrumb />
+    </div>
+    <article
+      title={title}
+      class="mx-auto max-w-2xl p-4 lg:max-w-6xl z-10 relative"
+    >
+      <header class="container mx-auto max-w-lg text-center">
+        <h1 class="font-bold text-4xl" set:html={title} />
+        <div class="my-4 text-primary-light">
+          <Fragment set:html={excerpt} />
+        </div>
+        <hr class="text-theme-grey-dark" />
+        <div
+          class="text-xs md:text-sm font-medium my-6 text-left text-primary-light"
+        >
+          <time>{date}</time>
+        </div>
+      </header>
+      <div class="container mx-auto max-w-xl">
+        {
+          img && (
+            <img
+              class="object-cover object-center w-full h-50 md:h-96"
+              src={img.node.link}
+              alt={img.node.altText}
+            />
+          )
+        }
+      </div>
+      <section class="wp-page container mx-auto py-6 max-w-lg text-theme-black">
+        <Fragment set:html={content} />
+      </section>
+      <div class="container mx-auto py-6 max-w-xl text-theme-black">
+        <p>SHARE:</p>
+      </div>
+    </article>
+  </PageWrapper>
+</Layout>
+
+<style>
+  @media (min-width: 640px) {
+    :global(.triangle) {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 0% 100%);
+    }
+  }
+  .wp-page :global(.wp-block-heading) {
+    color: var(--color-theme-black);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    margin-block: calc(var(--spacing) * 5);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .wp-page :global(p) {
+    margin-block: calc(var(--spacing) * 5);
+    color: var(--color-theme-black);
+  }
+
+  .wp-page :global(blockquote) {
+    font-style: italic;
+    margin-left: 32px;
+    border-left: 4px solid var(--color-primary-light);
+    padding-left: 8px;
+  }
+</style>
