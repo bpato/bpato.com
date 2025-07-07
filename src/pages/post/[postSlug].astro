@@ -1,10 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import { wpquery } from "../../lib/wpQuery";
+import { wpquery, type gqlParams } from "../../lib/wpQuery";
 import { Post } from "../../lib/wpResources";
 import PageWrapper from "../../components/PageWrapper.astro";
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
+import Breadcrumb, {
+  type BreadcrumbParams,
+} from "@/components/Breadcrumb/Breadcrumb.astro";
 
 const { postSlug: slug } = Astro.params;
 
@@ -25,7 +27,7 @@ export const getStaticPaths = (() => {
 const { postBy: post } = await wpquery({
   query: Post.BY_SLUG,
   variables: { slug },
-});
+} satisfies gqlParams);
 
 const {
   excerpt,
@@ -42,6 +44,17 @@ const date = new Date(dateGmt).toLocaleDateString("en-US", {
   year: "numeric",
 });
 
+const blogBc = {
+  name: "Blog",
+  slug: "blog",
+  url: "/blog",
+} satisfies BreadcrumbParams;
+
+const postBc = {
+  name: title,
+  slug: slug,
+} satisfies BreadcrumbParams;
+
 const sizeBack = img ? "h-[50%] md:h-[65%]" : "h-[360px]";
 ---
 
@@ -49,7 +62,7 @@ const sizeBack = img ? "h-[50%] md:h-[65%]" : "h-[360px]";
   <div class=`bg-theme-black absolute w-full ${sizeBack} z-10 triangle`></div>
   <PageWrapper classes="px-5 py-20 sm:px-20 z-0" bgColor="bg-white">
     <div slot="main-header" class="z-10 relative">
-      <Breadcrumb />
+      <Breadcrumb breadcrumbs={[blogBc, postBc]} />
     </div>
     <article
       title={title}

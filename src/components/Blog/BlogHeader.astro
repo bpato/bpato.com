@@ -1,5 +1,12 @@
 ---
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
+import Breadcrumb, {
+  type BreadcrumbParams,
+} from "@/components/Breadcrumb/Breadcrumb.astro";
+
+const blogBc = {
+  name: "Blog",
+  slug: "blog",
+} satisfies BreadcrumbParams;
 ---
 
 <section
@@ -10,10 +17,10 @@ import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
     <div class="px-5">
       <div class="flex flex-row w-full">
         <hr class="text-primary-light w-20 mt-7" />
-        <h1 class="font-special text-5xl mx-5">Blog</h1>
+        <h1 class="font-special text-5xl mx-5">{blogBc.name}</h1>
         <hr class="text-primary-light w-full mt-7" />
       </div>
-      <Breadcrumb />
+      <Breadcrumb breadcrumbs={[blogBc]} />
     </div>
   </div>
   <div class="bg-theme-grey-dark"></div>
