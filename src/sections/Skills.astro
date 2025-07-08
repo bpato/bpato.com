@@ -20,7 +20,7 @@ import { data } from "@/data/skills.json";
 
 <!-- Chart code -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("astro:page-load", function () {
     am5.ready(function () {
       var data = document.getElementById("chartdiv")?.dataset.skills;
       // Create root element

@@ -28,7 +28,11 @@ export const getStaticPaths = (() => {
       <header>
         <h1 class="font-bold text-4xl" set:html={title} />
         <div class="py-5 text-sm font-regular flex">
-          <a href="#" class="flex flex-row items-center hover:text-indigo-600">
+          <a
+            href="#"
+            data-astro-history="replace"
+            class="flex flex-row items-center hover:text-indigo-600"
+          >
             <svg
               fill="currentColor"
               height="16px"

@@ -5,6 +5,7 @@ import "@fontsource/permanent-marker";
 
 import "./src/styles/global.css";
 
+import { ClientRouter } from "astro:transitions";
 import Header from "@/components/Header/Header.astro";
 import BackToTop from "@/components/BackToTop.astro";
 import Footer from "@/components/Footer.astro";
@@ -23,6 +24,7 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title} | {pageTitle}</title>
+    <ClientRouter />
   </head>
   <body class=`max-w-full ${bgColor}`>
     <Header />
