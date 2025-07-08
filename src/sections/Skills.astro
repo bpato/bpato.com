@@ -1,0 +1,79 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import { data } from "@/data/skills.json";
+---
+
+<section class="bg-theme-black py-12">
+  <SectionTitle color="text-primary-light" font="font-special"
+    >Skills</SectionTitle
+  >
+  <div class="container mx-auto p-6">
+    <div id="chartdiv" class="min-h-[60vh]" data-skills={JSON.stringify(data)}>
+    </div>
+  </div>
+</section>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/wc.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<!-- Chart code -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    am5.ready(function () {
+      var data = document.getElementById("chartdiv")?.dataset.skills;
+      // Create root element
+      // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+      var root = am5.Root.new("chartdiv");
+
+      // Set themes
+      // https://www.amcharts.com/docs/v5/concepts/themes/
+      root.setThemes([am5themes_Animated.new(root)]);
+
+      // Add wrapper container
+      var container = root.container.children.push(
+        am5.Container.new(root, {
+          width: am5.percent(100),
+          height: am5.percent(100),
+          layout: root.verticalLayout,
+        })
+      );
+
+      // Add series
+      // https://www.amcharts.com/docs/v5/charts/word-cloud/
+      var series = container.children.push(
+        am5wc.WordCloud.new(root, {
+          categoryField: "x",
+          valueField: "value",
+          calculateAggregates: true, // this is needed for heat rules to work
+        })
+      );
+
+      // Set up heat rules
+      // https://www.amcharts.com/docs/v5/charts/word-cloud/#Via_heat_rules
+      series.set("heatRules", [
+        {
+          target: series.labels.template,
+          dataField: "value",
+          min: am5.color(0xffffff),
+          max: am5.color(0xffdf6c),
+          key: "fill",
+        },
+      ]);
+
+      // Configure labels
+      series.labels.template.setAll({
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 5,
+        paddingRight: 5,
+        fontFamily: "Courier New",
+        cursorOverStyle: "pointer",
+      });
+
+      // Data from:
+      series.data.setAll(JSON.parse(data));
+    }); // end am5.ready()
+  });
+</script>

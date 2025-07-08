@@ -1,0 +1,18 @@
+---
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
+
+const {
+  bgColor = "bg-theme-black",
+  textColor = "text-gray-200",
+  classes = "",
+} = Astro.props;
+---
+
+<main class={`min-w-full min-h-full ${bgColor} ${textColor} ${classes}`}>
+  <slot name="main-header">
+    <Breadcrumb />
+  </slot>
+  <slot name="before-content" />
+  <slot />
+  <slot name="after-content" />
+</main>

@@ -1,15 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/sections/Hero.astro";
-import Skills from "@/components/Skills.astro";
-import Projects from "@/components/Projects.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Projects from "@/sections/Projects.astro";
+import Skills from "@/sections/Skills.astro";
+import AboutMe from "@/sections/AboutMe.astro";
 ---
 
-<Layout>
+<Layout bgColor="bg-white">
   <Hero />
+  <AboutMe />
   <Skills />
   <Projects />
 </Layout>

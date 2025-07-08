@@ -1,0 +1,38 @@
+---
+import TechTag from "@/components/TechTag.astro";
+const { project } = Astro.props;
+
+const linkUrl = project.data.website
+  ? project.data.website
+  : project.data.source;
+
+const projectId = `project_${project.id}`;
+---
+
+<article
+  id={projectId}
+  class="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300"
+>
+  <a href={linkUrl ? linkUrl : `#${projectId}`}>
+    <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
+      <img
+        class="transition-transform duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110"
+        src={project.data.image}
+        alt="investment-seed-round"
+      />
+    </div>
+    <div class="p-4">
+      <h3
+        class="mb-2 text-slate-800 text-xl font-semibold"
+        set:html={project.data.title}
+      />
+      <p
+        class="text-slate-600 leading-normal font-light mb-4"
+        set:html={project.data.description}
+      />
+      <div class="flex flex-row flex-wrap justify-start gap-1.5 align-bottom">
+        {project.data.tech.map((t: string) => <TechTag tech={t} />)}
+      </div>
+    </div>
+  </a>
+</article>

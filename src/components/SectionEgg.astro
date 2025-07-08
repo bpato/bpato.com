@@ -1,0 +1,42 @@
+---
+const { id, title, imgSrc, imgClasses, bgColor = "bg-white" } = Astro.props;
+---
+
+<section {id} class=`${bgColor} container mx-auto py-20`>
+  <div class="flex flex-col sm:flex-row">
+    <div class="text-primary-light w-full sm:w-[50%] relative">
+      <svg
+        class="mx-auto z-0"
+        width="350px"
+        viewBox="0 0 160.5766 164.8858"
+        version="1.1"
+        id="svg5"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="layer1">
+          <path
+            d="M 76.458534,0.04184827 C 66.544196,-0.48306724 56.739542,3.9747372 49.629427,10.904087 42.163307,18.180391 37.552949,27.810506 32.851782,37.115696 25.324322,52.01507 17.191556,66.605408 9.8289787,81.586946 6.1241835,89.125547 2.5858995,96.849951 0.93275519,105.08543 c -1.65314429,8.23548 -1.28674581,17.11913 2.54558251,24.5937 3.905922,7.61811 10.9958973,13.09265 18.3408753,17.49074 29.678434,17.7711 66.534483,21.5076 100.339957,14.17199 5.70752,-1.2385 11.3821,-2.7869 16.67796,-5.24933 5.29586,-2.46242 10.22357,-5.87974 13.89532,-10.42153 6.10814,-7.55549 8.29206,-17.71266 7.76955,-27.4143 -0.52252,-9.70165 -3.52381,-19.089003 -6.84761,-28.218474 C 142.85914,60.386973 127.62356,31.141548 102.7824,11.682594 95.108005,5.6709714 86.193537,0.55726889 76.458534,0.04184827 Z"
+            id="path328"></path>
+        </g>
+      </svg>
+      <div
+        class=`bg-[url('${imgSrc}')] bg-no-repeat bg-center w-full h-full absolute top-0 z-10 ${imgClasses}`
+      >
+      </div>
+    </div>
+    <div class="w-full sm:w-[50%] p-6 flex justify-center flex-col">
+      <h2
+        class="font-special w-full md:w-fit text-4xl py-3 text-center md:text-left"
+      >
+        {title}
+      </h2>
+      <div class="xl:max-w-[25vw] md:pr-6">
+        <hr />
+        <p class="py-4 text-justify">
+          <slot />
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

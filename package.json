@@ -14,8 +14,10 @@
     "@fontsource/permanent-marker": "^5.2.6",
     "@tailwindcss/vite": "^4.1.11",
     "@wordpress/url": "^4.26.0",
+    "amcharts": "^3.14.5",
     "astro": "^5.11.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "toml": "^3.0.0"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.355",

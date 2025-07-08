@@ -1,0 +1,39 @@
+---
+export interface BreadcrumbParams {
+  name: string;
+  slug: string;
+  url?: string;
+}
+
+const { breadcrumbs = [] } = Astro.props;
+---
+
+<nav class="flex mx-auto max-w-2xl p-4 lg:max-w-6xl" aria-label="Breadcrumb">
+  <ol
+    class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
+  >
+    <li class="inline-flex items-center">
+      <a
+        href="/"
+        class="inline-flex items-center text-sm font-medium text-white hover:text-primary-light dark:text-gray-400 dark:hover:text-white"
+      >
+        /
+      </a>
+    </li>
+    {
+      breadcrumbs.map((breadcrumb: BreadcrumbParams) => (
+        <Fragment>
+          <li class="inline-flex items-center">
+            <span class="icon-[mdi--chevron-right] text-xl" />
+            <a
+              href={breadcrumb.url ? breadcrumb.url : ""}
+              class="inline-flex items-center text-sm font-medium text-white hover:text-primary-light dark:text-gray-400 dark:hover:text-white"
+            >
+              {breadcrumb.name}
+            </a>
+          </li>
+        </Fragment>
+      ))
+    }
+  </ol>
+</nav>

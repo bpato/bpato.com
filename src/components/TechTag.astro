@@ -1,0 +1,18 @@
+---
+import { getEntry, getCollection } from "astro:content";
+const { tech } = Astro.props;
+
+const badge = await getEntry("badges", tech);
+---
+
+{
+  badge ? (
+    <div class="transition-all mb-2 py-0.5">
+      <img class="shadow-sm" src={badge.data.imageUrl} title={tech} />
+    </div>
+  ) : (
+    <div class="mb-2 rounded-full bg-primary-light py-0.5 px-2.5 border border-transparent text-xs text-theme-black transition-all shadow-sm w-20 text-center">
+      {tech}
+    </div>
+  )
+}

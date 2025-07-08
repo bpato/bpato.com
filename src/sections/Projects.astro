@@ -1,0 +1,20 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+---
+
+<section id="projects" class="m:h-[60vh] py-12">
+  <SectionTitle color="text-theme-black" font="font-special"
+    >Projects</SectionTitle
+  >
+
+  <div
+    class="container mx-auto flex flex-row justify-around flex-wrap gap-0.5 mt-12"
+  >
+    {allProjects.map((project) => <ProjectCard {project} />)}
+  </div>
+</section>
