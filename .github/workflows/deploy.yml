@@ -23,6 +23,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Use variables
+        run: |
+          echo "variable from shell environment : $WP_DOMAIN"
+          echo "WP_DOMAIN=$WP_DOMAIN" >> $GITHUB_ENV
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
