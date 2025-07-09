@@ -21,3 +21,7 @@ imageUrl = "https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailw
 [[badges]]
 id = "graphql"
 imageUrl = "https://img.shields.io/badge/GraphQL-ffdf6c"
+
+[[badges]]
+id = "github-actions"
+imageUrl = "https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=202020&color=ffdf6c"
