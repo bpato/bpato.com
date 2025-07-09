@@ -26,7 +26,7 @@ jobs:
         env:
           WP_DOMAIN: ${{ vars.WP_DOMAIN }}
         run: |
-          echo "variable from shell environment : $WP_DOMAIN"
+          echo "variable from shell environment : ${{ vars.WP_DOMAIN }}"
           echo "WP_DOMAIN=$WP_DOMAIN" >> $GITHUB_ENV
       - name: Checkout your repository using git
         uses: actions/checkout@v4
