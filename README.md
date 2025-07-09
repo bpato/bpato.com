@@ -1,52 +1,81 @@
-# Astro Starter Kit: Basics
+[![Github All Releases](https://img.shields.io/github/downloads/bpato/bpato.com/total.svg)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-```sh
-npm create astro@latest -- --template basics
+# 🌐 Personal Website — Astro + TailwindCSS + Headless WordPress
+
+A fast, modern, and fully responsive personal website built using **Astro** and **TailwindCSS** on the frontend, and powered by a **headless WordPress** backend via **GraphQL API**.
+
+## 🚀 Features
+
+- ⚡️ Built with **Astro** for optimal performance and modern development.
+- 🎨 Styled with **TailwindCSS**.
+- ✍️ Dynamic content powered by **WordPress (headless)**.
+- 🔌 Fetches data using **GraphQL**.
+- 🧩 Modular and maintainable structure.
+- 📱 Fully responsive design.
+
+## 🛠️ Technologies Used
+
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=fff)](#)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](#)
+[![GraphQL](https://camo.githubusercontent.com/c8f5e2858227939492f1d491065f3d2c32c97440745a7f219b2183de345e5a6d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6772617068716c2d4531303039382e7376673f6c6f676f3d6772617068716c266c6f676f436f6c6f723d7768697465)](#)
+[![WordPress](https://img.shields.io/badge/WordPress-%2321759B.svg?logo=wordpress&logoColor=white)](#)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)](#)
+
+- **Frontend**: Astro, TailwindCSS
+- **Backend**: WordPress (headless)
+- **Data Layer**: GraphQL API (via WPGraphQL plugin)
+- **Deployment**: Github Actions
+
+## 📦 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/bpato/bpato.com.git
+cd bpato.com
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### 2. Install dependencies
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+npm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### 3. Set up environment variables
 
-## 🧞 Commands
+Create a `.env` file in the root directory with the following:
 
-All commands are run from the root of the project, from a terminal:
+```env
+WP_DOMAIN=https://yourwordpressdomain.com/
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+# Optional
+WP_API_CUSTOM=graphql
+```
 
-## 👀 Want to learn more?
+> Ensure WPGraphQL plugin is active in your WordPress install.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:4321` to see the site in action.
+
+## 🧪 GraphQL Queries
+
+This project uses GraphQL to fetch dynamic content such as:
+
+- Posts
+- Pages
+
+You can explore and test queries using the built-in WPGraphQL GraphiQL IDE at:
+
+```
+https://yourwordpressdomain.com/graphql
+```
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
