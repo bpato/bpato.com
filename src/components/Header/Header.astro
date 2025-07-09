@@ -3,6 +3,7 @@ import HeaderLinkList from "@/components/Header/HeaderLinkList.astro";
 import HeaderHamburguer from "@/components/Header/HeaderHamburguer.astro";
 import HeaderMobile from "@/components/Header/HeaderMobile.astro";
 import { Device } from "@/components/Header/HeaderLink.astro";
+import SocialLinks from "../SocialLinks.astro";
 ---
 
 <header class="animate-blur-header fixed top-0 z-60 w-screen">
@@ -10,11 +11,14 @@ import { Device } from "@/components/Header/HeaderLink.astro";
     class="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 pb-0 md:px-20 xl:px-8"
   >
     <div class="flex">
-      <div class="hidden lg:flex lg:gap-x-12">
+      <div class="hidden lg:flex lg:gap-x-12 text-theme-black">
         <HeaderLinkList device={Device.DESKTOP} />
       </div>
       <HeaderHamburguer text="Abrir Menú Principal" />
     </div>
+    <SocialLinks
+      colors="hover:bg-neutral-100 text-white hover:text-theme-black"
+    />
   </nav>
   <HeaderMobile />
 </header>
