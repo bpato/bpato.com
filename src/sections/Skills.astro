@@ -41,7 +41,7 @@ import { data } from "@/data/skills.json";
 
 <!-- Chart code -->
 <script>
-  document.addEventListener("astro:page-load", function () {
+  function loadChart() {
     am5.ready(function () {
       var data = document.getElementById("chartdiv")?.dataset.skills;
       // Create root element
@@ -96,5 +96,31 @@ import { data } from "@/data/skills.json";
       // Data from:
       series.data.setAll(JSON.parse(data));
     }); // end am5.ready()
+  }
+
+  document.addEventListener("astro:page-load", function () {
+    const target = document.getElementById("chartdiv");
+
+    const handleIntersection = (
+      [entry]: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
+      if (entry.isIntersecting) {
+        loadChart();
+        observer.unobserve(entry.target);
+      }
+    };
+
+    const createObserver = (
+      target: Element,
+      callback: IntersectionObserverCallback
+    ) => {
+      const observer = new IntersectionObserver(callback, { threshold: 0.5 });
+      observer.observe(target);
+    };
+
+    if (target) {
+      createObserver(target, handleIntersection);
+    }
   });
 </script>
