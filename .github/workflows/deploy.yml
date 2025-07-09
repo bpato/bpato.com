@@ -23,12 +23,6 @@ jobs:
     env:
       WP_DOMAIN: ${{ vars.WP_DOMAIN}}
     steps:
-      - name: Use variables
-        env:
-          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
-        run: |
-          echo "variable from shell environment : $WP_DOMAIN"
-          echo "WP_DOMAIN=$WP_DOMAIN" >> $GITHUB_ENV
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
@@ -39,8 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Invoke deployment hook
-        uses: distributhor/workflow-webhook@v3
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist
+          server-dir: /public_html
