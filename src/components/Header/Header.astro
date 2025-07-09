@@ -23,65 +23,69 @@ import { Device } from "@/components/Header/HeaderLink.astro";
 <div data-target class="absolute top-[150px]"></div>
 
 <script>
-  const mobileMenu = document.getElementById(
-    "mobile-menu"
-  ) as HTMLDialogElement;
-  const backdrop = document.getElementById("backdrop");
+  document.addEventListener("astro:page-load", function () {
+    const mobileMenu = document.getElementById(
+      "mobile-menu"
+    ) as HTMLDialogElement;
+    const backdrop = document.getElementById("backdrop");
 
-  const toggleMenu = () => {
-    mobileMenu.open ? mobileMenu.close() : mobileMenu.showModal();
+    const toggleMenu = () => {
+      mobileMenu.open ? mobileMenu.close() : mobileMenu.showModal();
 
-    if (mobileMenu.open) {
-      backdrop?.classList.add("visible");
-    } else {
-      backdrop?.classList.remove("visible");
-    }
-  };
+      if (mobileMenu.open) {
+        backdrop?.classList.add("visible");
+      } else {
+        backdrop?.classList.remove("visible");
+      }
+    };
 
-  const openMenuButton = document.getElementById("open-menu-button");
-  const closeMenuButton = document.getElementById("close-menu-button");
+    const openMenuButton = document.getElementById("open-menu-button");
+    const closeMenuButton = document.getElementById("close-menu-button");
 
-  // Add event listener to open menu button
-  openMenuButton?.addEventListener("click", toggleMenu);
+    // Add event listener to open menu button
+    openMenuButton?.addEventListener("click", toggleMenu);
 
-  // Add event listener to close menu button
-  closeMenuButton?.addEventListener("click", toggleMenu);
+    // Add event listener to close menu button
+    closeMenuButton?.addEventListener("click", toggleMenu);
 
-  document.addEventListener("click", (event) => {
-    const isClickInsideMenu = mobileMenu.contains(event.target as Node);
-    const isClickInsideButton = openMenuButton?.contains(event.target as Node);
+    document.addEventListener("click", (event) => {
+      const isClickInsideMenu = mobileMenu.contains(event.target as Node);
+      const isClickInsideButton = openMenuButton?.contains(
+        event.target as Node
+      );
 
-    if (isClickInsideMenu && !isClickInsideButton) {
-      mobileMenu.close();
-      backdrop?.classList.remove("visible");
+      if (isClickInsideMenu && !isClickInsideButton) {
+        mobileMenu.close();
+        backdrop?.classList.remove("visible");
+      }
+    });
+
+    const mobileItems = mobileMenu.querySelectorAll("a");
+
+    mobileItems?.forEach((item) => item.addEventListener("click", toggleMenu));
+
+    const target = document.querySelector("[data-target]");
+    const header = document.querySelector("header");
+    const handleIntersection = ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting) {
+        header?.classList.remove("end-state");
+      } else {
+        header?.classList.add("end-state");
+      }
+    };
+
+    const createObserver = (
+      target: Element,
+      callback: IntersectionObserverCallback
+    ) => {
+      const observer = new IntersectionObserver(callback, { threshold: 0.5 });
+      observer.observe(target);
+    };
+
+    if (target) {
+      createObserver(target, handleIntersection);
     }
   });
-
-  const mobileItems = mobileMenu.querySelectorAll("a");
-
-  mobileItems?.forEach((item) => item.addEventListener("click", toggleMenu));
-
-  const target = document.querySelector("[data-target]");
-  const header = document.querySelector("header");
-  const handleIntersection = ([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting) {
-      header?.classList.remove("end-state");
-    } else {
-      header?.classList.add("end-state");
-    }
-  };
-
-  const createObserver = (
-    target: Element,
-    callback: IntersectionObserverCallback
-  ) => {
-    const observer = new IntersectionObserver(callback, { threshold: 0.5 });
-    observer.observe(target);
-  };
-
-  if (target) {
-    createObserver(target, handleIntersection);
-  }
 </script>
 
 <style>

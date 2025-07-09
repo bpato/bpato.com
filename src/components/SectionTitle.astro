@@ -2,8 +2,8 @@
 const { font = "font-normal", color = "font-black" } = Astro.props;
 ---
 
-<di class="container text-center"
-  ><h2 class=`${color} mx-auto ${font} w-fit text-4xl pt-5 md:pt-0 border-b-2`>
+<div class="container mx-auto text-center relative">
+  <h2 class=`${color} mx-auto ${font} w-fit text-4xl pt-5 md:pt-0 border-b-2`>
     <slot />
-  </h2></di
->
+  </h2>
+</div>
