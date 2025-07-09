@@ -23,6 +23,8 @@ jobs:
       WP_DOMAIN: ${{ vars.WP_DOMAIN}}
     steps:
       - name: Use variables
+        env:
+          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
         run: |
           echo "variable from shell environment : $WP_DOMAIN"
           echo "WP_DOMAIN=$WP_DOMAIN" >> $GITHUB_ENV
