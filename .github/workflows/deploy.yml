@@ -10,6 +10,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+env:
+  WP_DOMAIN: ${{ vars.WP_DOMAIN}}
+
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -24,8 +27,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
         uses: withastro/action@v4
-        env:
-          WP_DOMAIN: ${{ secrets.WP_DOMAIN}}
 
   deploy:
     needs: build
