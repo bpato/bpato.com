@@ -1,0 +1,169 @@
+{
+    "data": [
+        {
+            "x":"Bash",
+            "value":10,
+            "category":"languages"
+        },
+        {
+            "x":"CSS",
+            "value":7,
+            "category":"languages"
+        },
+        {
+            "x":"HTML",
+            "value":7,
+            "category":"languages"
+        },
+        {
+            "x":"Java",
+            "value":2,
+            "category":"languages"
+        },
+        {
+            "x":"JavaScript",
+            "value":8,
+            "category":"languages"
+        },
+        {
+            "x":"Markdown",
+            "value":5,
+            "category":"languages"
+        },
+        {
+            "x":"Python",
+            "value":5,
+            "category":"languages"
+        },
+        {
+            "x":"Sass",
+            "value":6,
+            "category":"languages"
+        },
+        {
+            "x":"SQL",
+            "value":6,
+            "category":"languages"
+        },
+        {
+            "x":"TypeScript",
+            "value":4,
+            "category":"languages"
+        },
+        {
+            "x":"PHP",
+            "value":10,
+            "category":"languages"
+        },
+        {
+            "x":"Bootstrap",
+            "value":6,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"GitHub Actions",
+            "value":5,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"GraphQL",
+            "value":8,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"PhpUnite",
+            "value":8,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"React",
+            "value":7,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"TailwindCSS",
+            "value":7,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"Vite",
+            "value":5,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"Astro",
+            "value":6,
+            "category":"frameworks & libraries"
+        },
+        {
+            "x":"Apache",
+            "value":4,
+            "category":"tools"
+        },
+        {
+            "x":"Debian",
+            "value":5,
+            "category":"tools"
+        },
+        {
+            "x":"Docker",
+            "value":7,
+            "category":"tools"
+        },
+        {
+            "x":"Git",
+            "value":9,
+            "category":"tools"
+        },
+        {
+            "x":"Jenkins",
+            "value":4,
+            "category":"tools"
+        },
+        {
+            "x":"Nginx",
+            "value":7,
+            "category":"tools"
+        },
+        {
+            "x":"Notion",
+            "value":5,
+            "category":"tools"
+        },
+        {
+            "x":"Ubuntu",
+            "value":5,
+            "category":"tools"
+        },
+        {
+            "x":"Mint",
+            "value":5,
+            "category":"tools"
+        },
+        {
+            "x":"Visual Studio Code",
+            "value":5,
+            "category":"tools"
+        },
+        {
+            "x":"GitHub",
+            "value":5,
+            "category":"cloud & providers"
+        },
+        {
+            "x":"GitHub Pages",
+            "value":5,
+            "category":"cloud & providers"
+        },
+        {
+            "x":"Arduino",
+            "value":3,
+            "category":"Hardware"
+        },
+        {
+            "x":"RaspberryPI",
+            "value":4,
+            "category":"Hardware"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+[[badges]]
+id = "css3"
+imageUrl = "https://img.shields.io/badge/CSS-1572B6.svg?logo=css3&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "html5"
+imageUrl = "https://img.shields.io/badge/HTML-E34F26.svg?logo=html5&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "astro"
+imageUrl = "https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "wordpress"
+imageUrl = "https://img.shields.io/badge/WordPress-%2321759B.svg?logo=wordpress&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "tailwindcss"
+imageUrl = "https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "graphql"
+imageUrl = "https://img.shields.io/badge/GraphQL-ffdf6c"
