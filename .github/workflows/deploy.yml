@@ -10,9 +10,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
-env:
-  WP_DOMAIN: ${{ vars.WP_DOMAIN}}
-
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -22,6 +19,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      WP_DOMAIN: ${{ vars.WP_DOMAIN}}
     steps:
       - name: Use variables
         run: |
