@@ -4,6 +4,8 @@
 
 A fast, modern, and fully responsive personal website built using **Astro** and **TailwindCSS** on the frontend, and powered by a **headless WordPress** backend via **GraphQL API**.
 
+![Project landing image](https://github.com/bpato/bpato.com/blob/master/public/images/projects/1_website.png?raw=true)
+
 ## 🚀 Features
 
 - ⚡️ Built with **Astro** for optimal performance and modern development.
