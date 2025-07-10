@@ -48,6 +48,9 @@ npm install
 Create a `.env` file in the root directory with the following:
 
 ```env
+# Website domain to generate robots.txt and sitemaps
+DOMAIN=https://maindomain.com
+
 WP_DOMAIN=https://yourwordpressdomain.com/
 
 # Optional
