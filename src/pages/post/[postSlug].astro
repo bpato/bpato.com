@@ -36,6 +36,7 @@ const {
   dateGmt,
   featuredImage: img = false,
   tags: { edges: tags },
+  seo,
 } = post;
 
 const date = new Date(dateGmt).toLocaleDateString("en-US", {
@@ -58,7 +59,7 @@ const postBc = {
 const sizeBack = img ? "h-[50%] md:h-[65%]" : "h-[360px]";
 ---
 
-<Layout pageTitle={title}>
+<Layout title=`${blogBc.name} - ${postBc.name}` {seo}>
   <div class=`bg-theme-black absolute w-full ${sizeBack} z-10 triangle`></div>
   <PageWrapper classes="px-5 py-20 sm:px-20 z-0" bgColor="bg-white">
     <div slot="main-header" class="z-10 relative">

@@ -9,12 +9,23 @@ import { ClientRouter } from "astro:transitions";
 import Header from "@/components/Header/Header.astro";
 import BackToTop from "@/components/BackToTop.astro";
 import Footer from "@/components/Footer.astro";
+import SocialMeta from "@/components/SocialMeta.astro";
+import type { ACTION_ERROR_CODES } from "astro:actions";
 
 const {
-  title = "BP",
-  pageTitle = "Web",
+  title = "Home",
+  pageTitle = "Brais Pato's Portfolio",
   bgColor = "bg-gray-200",
+  seo = {
+    title: "Brais Pato's Portfolio",
+    metaDesc:
+      "I'm Brais Pato, Galician based Senior Backend Developer with 6+ years industry experience.",
+    filePath: "/images/hero.webp",
+    pageType: "WebPage",
+  },
 } = Astro.props;
+
+const domain = import.meta.env.DOMAIN;
 ---
 
 <!doctype html>
@@ -23,7 +34,21 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title} | {pageTitle}</title>
+    <slot name="social-meta">
+      <SocialMeta {...seo} />
+    </slot>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Brais Pato",
+        jobTitle: "Software Engineer",
+        url: `${domain}`,
+      })}
+    />
     <ClientRouter />
   </head>
   <body class=`max-w-full ${bgColor}`>

@@ -6,6 +6,16 @@ export enum Page {
                 slug
                 title
                 content
+                seo {
+                    metaDesc
+                    title
+                    schema {
+                        pageType
+                    }
+                    opengraphImage {
+                        filePath
+                    }
+                }
             }
         }
     }`, 
@@ -32,6 +42,16 @@ export enum Post {
                         node {
                             name
                         }
+                    }
+                }
+                seo {
+                    metaDesc
+                    title
+                    schema {
+                        pageType
+                    }
+                    opengraphImage {
+                        filePath
                     }
                 }
 			}
@@ -65,6 +85,16 @@ export enum Post {
                     node {
                         name
                     }
+                }
+            }
+            seo {
+                metaDesc
+                title
+                schema {
+                    pageType
+                }
+                opengraphImage {
+                    filePath
                 }
             }
         }

@@ -1,0 +1,23 @@
+---
+const {
+  title = "",
+  metaDesc = "",
+  filePath = "/images/hero.webp",
+  pageType = "",
+} = Astro.props;
+
+const domain = import.meta.env.DOMAIN;
+---
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={metaDesc} />
+<meta property="og:image" content={filePath} />
+<meta property="og:url" content=`${domain}` />
+<meta property="og:type" content={pageType} />
+<meta property="og:site_name" content={title} />
+
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={metaDesc} />
+<meta name="twitter:image" content={filePath} />
+<meta name="twitter:url" content=`${domain}` />

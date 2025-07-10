@@ -7,14 +7,12 @@ import BlogCard from "@/components/Blog/BlogCard.astro";
 import BlogLine from "@/components/Blog/BlogLine.astro";
 import BlogHeader from "@/components/Blog/BlogHeader.astro";
 
-const { title } = Astro.props;
-
 const { posts } = await wpquery({
   query: Post.NODES,
 });
 ---
 
-<Layout pageTitle={title}>
+<Layout title="Blog">
   <PageWrapper bgColor="bg-theme-grey-dark">
     <BlogHeader slot="main-header" />
     <section
