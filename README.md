@@ -1,4 +1,3 @@
-[![Github All Releases](https://img.shields.io/github/downloads/bpato/bpato.com/total.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # 🌐 Personal Website — Astro + TailwindCSS + Headless WordPress
