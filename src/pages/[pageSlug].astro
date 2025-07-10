@@ -4,9 +4,12 @@ import Layout from "@/layouts/Layout.astro";
 import { wpquery } from "@/lib/wpQuery";
 import { Page } from "@/lib/wpResources";
 import PageWrapper from "@/components/PageWrapper.astro";
+import Breadcrumb, {
+  type BreadcrumbParams,
+} from "@/components/Breadcrumb/Breadcrumb.astro";
 
 const { slug: pageSlug } = Astro.params;
-const { title, content } = Astro.props;
+const { title, content, seo } = Astro.props;
 
 export const getStaticPaths = (() => {
   const data = wpquery({
@@ -20,14 +23,23 @@ export const getStaticPaths = (() => {
     }));
   });
 }) satisfies GetStaticPaths;
+
+const pageBc = {
+  name: title,
+  slug: pageSlug,
+} satisfies BreadcrumbParams;
 ---
 
-<Layout pageTitle={title}>
+<Layout title={pageBc.name} {seo}>
   <PageWrapper classes="px-5 py-20 sm:px-20 triangle">
+    <div slot="main-header" class="z-10 relative">
+      <Breadcrumb breadcrumbs={[pageBc]} />
+    </div>
     <article title={title} class="mx-auto max-w-2xl p-4 sm:pb-25 lg:max-w-6xl">
       <header>
         <h1 class="font-bold text-4xl" set:html={title} />
-        <div class="py-5 text-sm font-regular flex">
+        {
+          /* <!-- <div class="py-5 text-sm font-regular flex">
           <a
             href="#"
             data-astro-history="replace"
@@ -50,7 +62,8 @@ export const getStaticPaths = (() => {
             </svg>
             <span class="ml-1">activewear</span></a
           >
-        </div>
+        </div> --> */
+        }
       </header>
       <hr class="text-theme-grey-medium" />
       <section class="wp-page my-5">
