@@ -25,3 +25,27 @@ imageUrl = "https://img.shields.io/badge/GraphQL-ffdf6c"
 [[badges]]
 id = "github-actions"
 imageUrl = "https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "symfony"
+imageUrl = "https://img.shields.io/badge/symfony-%23000000.svg?logo=symfony&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "ddd"
+imageUrl = "https://img.shields.io/badge/DDD-ffdf6c"
+
+[[badges]]
+id = "cqrs"
+imageUrl = "https://img.shields.io/badge/CQRS-ffdf6c"
+
+[[badges]]
+id = "hexagonal"
+imageUrl = "https://img.shields.io/badge/Hexagonal-ffdf6c"
+
+[[badges]]
+id = "phpunite"
+imageUrl = "https://img.shields.io/badge/PHPUnite-ffdf6c"
+
+[[badges]]
+id = "openapi"
+imageUrl = "https://img.shields.io/badge/openapiinitiative-%23000000.svg?logo=openapiinitiative&logoColor=202020&color=ffdf6c"
