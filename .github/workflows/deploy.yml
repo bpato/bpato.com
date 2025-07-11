@@ -22,6 +22,7 @@ jobs:
     environment: production
     env:
       WP_DOMAIN: ${{ vars.WP_DOMAIN}}
+      DOMAIN: ${{ vars.DOMAIN}}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
