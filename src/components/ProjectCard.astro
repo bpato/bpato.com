@@ -13,12 +13,16 @@ const projectId = `project_${project.id}`;
   id={projectId}
   class="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[90vw] sm:w-96 hover:shadow-lg transition-shadow duration-300"
 >
-  <a href={linkUrl ? linkUrl : `#${projectId}`}>
+  <a
+    href={linkUrl ? linkUrl : `#${projectId}`}
+    aria-label=`Source code's of ${project.data.title} project`
+    title=`Source code's of ${project.data.title} project`
+  >
     <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
       <img
         class="transition-transform duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110"
         src={project.data.image}
-        alt="investment-seed-round"
+        alt=`Screen capture that show ${project.data.title} project`
       />
     </div>
     <div class="p-4">

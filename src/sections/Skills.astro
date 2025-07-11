@@ -27,8 +27,17 @@ import { data } from "@/data/skills.json";
   <SectionTitle color="text-primary-light" font="font-special"
     >Skills</SectionTitle
   >
-  <div class="container mx-auto p-6">
-    <div id="chartdiv" class="min-h-[60vh]" data-skills={JSON.stringify(data)}>
+  <div
+    class="container mx-auto p-6"
+    aria-label="Word cloud that show all my skills and knollege"
+    role="img"
+  >
+    <div
+      id="chartdiv"
+      class="min-h-[60vh]"
+      aria-hidden="true"
+      data-skills={JSON.stringify(data)}
+    >
     </div>
   </div>
 </section>

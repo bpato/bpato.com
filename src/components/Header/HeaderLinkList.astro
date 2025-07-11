@@ -10,9 +10,13 @@ const iconProps: IconProps = {
 const { device } = Astro.props;
 ---
 
-<HeaderLink href="/" text="" {device}>
-  <Logo {...iconProps} slot="before-text" />
-</HeaderLink>
-<HeaderLink text="About Me" href="/#about-me" {device} />
-<HeaderLink text="Projects" href="/#projects" {device} />
-<HeaderLink text="Blog" href="/blog" {device} />
+<ul class="list-none lg:flex lg:gap-x-12" aria-label="Header Menu">
+  <li>
+    <HeaderLink href="/" text="" ariaLabel="Home" {device}>
+      <Logo {...iconProps} slot="before-text" />
+    </HeaderLink>
+  </li>
+  <li><HeaderLink text="About Me" href="/#about-me" {device} /></li>
+  <li><HeaderLink text="Projects" href="/#projects" {device} /></li>
+  <li><HeaderLink text="Blog" href="/blog" {device} /></li>
+</ul>
