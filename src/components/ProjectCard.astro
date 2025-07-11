@@ -23,6 +23,7 @@ const projectId = `project_${project.id}`;
     href={linkUrl ? linkUrl : `#${projectId}`}
     aria-label=`Source code's of ${project.data.title} project`
     title=`Source code's of ${project.data.title} project`
+    class="flex flex-col justify-stretch h-full"
   >
     <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
       <img
@@ -31,16 +32,18 @@ const projectId = `project_${project.id}`;
         alt=`Screen capture that show ${project.data.title} project`
       />
     </div>
-    <div class="p-4">
-      <h3
-        class="mb-2 text-slate-800 text-xl font-semibold"
-        set:html={project.data.title}
-      />
-      <p
-        class="text-slate-600 leading-normal font-light mb-4"
-        set:html={project.data.description}
-      />
-      <div class="flex flex-row flex-wrap justify-start gap-1.5 align-bottom">
+    <div class="p-4 flex flex-col justify-between grow">
+      <div>
+        <h3
+          class="mb-2 text-slate-800 text-xl font-semibold"
+          set:html={project.data.title}
+        />
+        <p
+          class="text-slate-600 leading-normal font-light mb-4"
+          set:html={project.data.description}
+        />
+      </div>
+      <div class="flex flex-row flex-wrap justify-start gap-1.5">
         {project.data.tech.map((t: string) => <TechTag tech={t} />)}
       </div>
     </div>
