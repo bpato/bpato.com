@@ -43,8 +43,8 @@ id = "hexagonal"
 imageUrl = "https://img.shields.io/badge/Hexagonal-ffdf6c"
 
 [[badges]]
-id = "phpunite"
-imageUrl = "https://img.shields.io/badge/PHPUnite-ffdf6c"
+id = "phpunit"
+imageUrl = "https://img.shields.io/badge/PHPUnit-ffdf6c"
 
 [[badges]]
 id = "openapi"
