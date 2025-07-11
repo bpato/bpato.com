@@ -1,4 +1,13 @@
 ---
+export type Prop = {
+  excerpt: string;
+  title: string;
+  slug: string;
+  dateGmt: string;
+  featuredImage: boolean;
+  edges: { tags: string[] };
+};
+
 const {
   excerpt,
   title,

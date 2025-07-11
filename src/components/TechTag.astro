@@ -1,5 +1,11 @@
 ---
+import type { CollectionKey } from "astro:content";
 import { getEntry, getCollection } from "astro:content";
+
+export type Props = {
+  tech: string;
+};
+
 const { tech } = Astro.props;
 
 const badge = await getEntry("badges", tech);

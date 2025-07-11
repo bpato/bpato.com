@@ -1,4 +1,12 @@
 ---
+export type Prop = {
+  excerpt: string;
+  title: string;
+  slug: string;
+  dateGmt: string;
+  edges: { tags: string[] };
+};
+
 const {
   excerpt,
   title,

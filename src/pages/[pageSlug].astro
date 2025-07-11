@@ -8,6 +8,17 @@ import Breadcrumb, {
   type BreadcrumbParams,
 } from "@/components/Breadcrumb/Breadcrumb.astro";
 
+export type Props = {
+  title: string;
+  content: string;
+  seo: {
+    title: string;
+    metaDesc: string;
+    filePath: string;
+    pageType: string;
+  };
+};
+
 const { slug: pageSlug } = Astro.params;
 const { title, content, seo } = Astro.props;
 

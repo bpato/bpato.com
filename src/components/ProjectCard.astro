@@ -1,5 +1,11 @@
 ---
 import TechTag from "@/components/TechTag.astro";
+import type { CollectionEntry, CollectionKey } from "astro:content";
+
+export type Props = {
+  project: CollectionEntry<"projects">;
+};
+
 const { project } = Astro.props;
 
 const linkUrl = project.data.website

@@ -1,4 +1,12 @@
 ---
+export type Props = {
+  id: string;
+  title: string;
+  imgSrc: string;
+  imgClasses: string;
+  bgColor?: string;
+};
+
 const { id, title, imgSrc, imgClasses, bgColor = "bg-white" } = Astro.props;
 ---
 

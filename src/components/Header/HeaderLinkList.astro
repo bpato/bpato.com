@@ -1,10 +1,14 @@
 ---
-import HeaderLink from "@/components/Header/HeaderLink.astro";
+import HeaderLink, { Device } from "@/components/Header/HeaderLink.astro";
 import Logo, { type Props as IconProps } from "@/assets/Logo.astro";
 
 const iconProps: IconProps = {
   height: "18pt",
   width: "18pt",
+};
+
+export type Props = {
+  device: Device;
 };
 
 const { device } = Astro.props;

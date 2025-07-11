@@ -5,6 +5,10 @@ export interface BreadcrumbParams {
   url?: string;
 }
 
+export type Prop = {
+  breadcrumbs: BreadcrumbParams[];
+};
+
 const { breadcrumbs = [] } = Astro.props;
 ---
 

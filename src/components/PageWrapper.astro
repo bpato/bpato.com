@@ -1,6 +1,12 @@
 ---
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.astro";
 
+export type Props = {
+  bgColor?: string;
+  textColor?: string;
+  classes?: string;
+};
+
 const {
   bgColor = "bg-theme-black",
   textColor = "text-gray-200",

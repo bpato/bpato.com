@@ -1,4 +1,8 @@
 ---
+export type Props = {
+  colors: string;
+};
+
 const {
   colors = "hover:bg-neutral-100 dark:text-white dark:hover:bg-secondary-900",
 } = Astro.props;
