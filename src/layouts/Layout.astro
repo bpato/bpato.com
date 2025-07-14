@@ -23,6 +23,8 @@ export type Props = {
   };
 };
 
+const domain = import.meta.env.DOMAIN;
+
 const {
   title = "Home",
   pageTitle = "Brais Pato's Portfolio",
@@ -31,12 +33,10 @@ const {
     title: "Brais Pato's Portfolio",
     metaDesc:
       "I'm Brais Pato, Galician based Senior Backend Developer with 6+ years industry experience.",
-    filePath: "/images/hero.webp",
+    filePath: `${domain}/images/hero.webp`,
     pageType: "WebPage",
   },
 } = Astro.props;
-
-const domain = import.meta.env.DOMAIN;
 ---
 
 <!doctype html>
