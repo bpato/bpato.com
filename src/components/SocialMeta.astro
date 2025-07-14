@@ -6,14 +6,14 @@ export type Props = {
   pageType: string;
 };
 
+const domain = import.meta.env.DOMAIN;
+
 const {
   title = "",
   metaDesc = "",
-  filePath = "/images/hero.webp",
+  filePath = `${domain}/images/hero.webp`,
   pageType = "",
 } = Astro.props;
-
-const domain = import.meta.env.DOMAIN;
 ---
 
 <meta property="og:title" content={title} />
