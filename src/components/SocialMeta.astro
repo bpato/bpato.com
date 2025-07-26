@@ -2,8 +2,12 @@
 export type Props = {
   title: string;
   metaDesc: string;
-  filePath: string;
-  pageType: string;
+  opengraphImage: {
+    sourceUrl: string;
+  };
+  schema: {
+    pageType: string;
+  };
 };
 
 const domain = import.meta.env.DOMAIN;
@@ -11,20 +15,24 @@ const domain = import.meta.env.DOMAIN;
 const {
   title = "",
   metaDesc = "",
-  filePath = `${domain}/images/hero.webp`,
-  pageType = "",
+  opengraphImage = {
+    sourceUrl: `${domain}/images/hero.webp`,
+  },
+  schema = {
+    pageType: "",
+  },
 } = Astro.props;
 ---
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={metaDesc} />
-<meta property="og:image" content={filePath} />
+<meta property="og:image" content={opengraphImage?.sourceUrl} />
 <meta property="og:url" content=`${domain}` />
-<meta property="og:type" content={pageType} />
+<meta property="og:type" content={schema?.pageType} />
 <meta property="og:site_name" content={title} />
 
 <meta name="twitter:card" content="photo" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={metaDesc} />
-<meta name="twitter:image" content={filePath} />
+<meta name="twitter:image" content={opengraphImage?.sourceUrl} />
 <meta name="twitter:url" content=`${domain}` />
