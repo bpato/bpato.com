@@ -14,8 +14,12 @@ export type Props = {
   seo: {
     title: string;
     metaDesc: string;
-    filePath: string;
-    pageType: string;
+    opengraphImage: {
+      sourceUrl: string;
+    };
+    schema: {
+      pageType: string;
+    };
   };
 };
 

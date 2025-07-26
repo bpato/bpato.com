@@ -18,8 +18,12 @@ export type Props = {
   seo?: {
     title: string;
     metaDesc: string;
-    filePath: string;
-    pageType: string;
+    opengraphImage: {
+      sourceUrl: string;
+    };
+    schema: {
+      pageType: string;
+    };
   };
 };
 
@@ -33,8 +37,12 @@ const {
     title: "Brais Pato's Portfolio",
     metaDesc:
       "I'm Brais Pato, Galician based Senior Backend Developer with 6+ years industry experience.",
-    filePath: `${domain}/images/hero.webp`,
-    pageType: "WebPage",
+    opengraphImage: {
+      sourceUrl: `${domain}/images/hero.webp`,
+    },
+    schema: {
+      pageType: "WebPage",
+    },
   },
 } = Astro.props;
 ---

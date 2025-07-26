@@ -13,7 +13,8 @@ export enum Page {
                         pageType
                     }
                     opengraphImage {
-                        filePath
+                        srcSet
+                        sourceUrl
                     }
                 }
             }
@@ -34,7 +35,9 @@ export enum Post {
                 featuredImage {
                     node {
                             altText
-                            link
+                            uri
+                            srcSet
+                            sourceUrl
                         }
                 }
                 tags {
@@ -51,7 +54,8 @@ export enum Post {
                         pageType
                     }
                     opengraphImage {
-                        filePath
+                        srcSet
+                        sourceUrl
                     }
                 }
 			}
@@ -77,7 +81,9 @@ export enum Post {
             featuredImage {
                 node {
                         altText
-                        link
+                        uri
+                        srcSet
+                        sourceUrl
                     }
             }
             tags {
@@ -94,7 +100,8 @@ export enum Post {
                     pageType
                 }
                 opengraphImage {
-                    filePath
+                    srcSet
+                    sourceUrl
                 }
             }
         }
