@@ -52,17 +52,17 @@ import { data } from "@/data/skills.json";
 <script>
   function loadChart() {
     am5.ready(function () {
-      var data = document.getElementById("chartdiv")?.dataset.skills;
+      let data = document.getElementById("chartdiv")?.dataset.skills;
       // Create root element
       // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-      var root = am5.Root.new("chartdiv");
+      let root = am5.Root.new("chartdiv");
 
       // Set themes
       // https://www.amcharts.com/docs/v5/concepts/themes/
       root.setThemes([am5themes_Animated.new(root)]);
 
       // Add wrapper container
-      var container = root.container.children.push(
+      let container = root.container.children.push(
         am5.Container.new(root, {
           width: am5.percent(100),
           height: am5.percent(100),
@@ -72,7 +72,7 @@ import { data } from "@/data/skills.json";
 
       // Add series
       // https://www.amcharts.com/docs/v5/charts/word-cloud/
-      var series = container.children.push(
+      let series = container.children.push(
         am5wc.WordCloud.new(root, {
           categoryField: "x",
           valueField: "value",

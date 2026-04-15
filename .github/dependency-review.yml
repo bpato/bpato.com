@@ -1,0 +1,20 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      production:
+        dependency-names:
+          - astro
+          - tailwindcss
+      development:
+        dependency-names:
+          - "@iconify/*"
+
+vulnerability-exceptions:
+  - scope: vulnerability
+    details:
+      - "GHSA-5ff5-9fcw-vg88" # Astro X-Forwarded-Host (acceptable for static site)
