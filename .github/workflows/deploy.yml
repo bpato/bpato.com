@@ -1,54 +1,86 @@
 name: Deploy to Hosting
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
+    branches: [main]
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
-  build:
+  security:
     runs-on: ubuntu-latest
-    environment: production
-    env:
-      WP_DOMAIN: ${{ vars.WP_DOMAIN}}
-      DOMAIN: ${{ vars.DOMAIN}}
     steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v4
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-folder
-          path: ./dist/
+      - uses: actions/checkout@v4
 
-  deploy:
-    needs: build
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          config-file: ./.github/dependency-review.yml
+
+      - run: npm ci
+
+      - run: npm audit --audit-level=high
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: TypeScript check
+        run: npm run check
+
+      - name: Build size check
+        run: |
+          npm run build
+          du -sh dist/
+          BUILD_SIZE=$(du -s dist/ | cut -f1)
+          echo "Build size: ${BUILD_SIZE}KB"
+
+  build-deploy:
     runs-on: ubuntu-latest
+    needs: security
     environment: production
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
         with:
-          name: dist-folder
-          path: ./dist/
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          WP_DOMAIN: ${{ secrets.WP_DOMAIN }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR}}
+          server-dir: ${{ vars.FTP_SERVER_DIR }}
+
+      - name: Health check
+        run: |
+          MAX_RETRIES=3
+          RETRY_DELAY=10
+          SITE_URL=${{ vars.SITE_URL || secrets.DOMAIN }}
+          
+          for i in $(seq 1 $MAX_RETRIES); do
+            echo "Health check attempt $i of $MAX_RETRIES..."
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL" --max-time 30)
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✓ Site is healthy (HTTP $HTTP_CODE)"
+              exit 0
+            fi
+            echo "✗ Got HTTP $HTTP_CODE, retrying in ${RETRY_DELAY}s..."
+            sleep $RETRY_DELAY
+          done
+          
+          echo "✗ Health check failed after $MAX_RETRIES attempts"
+          exit 1
