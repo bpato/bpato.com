@@ -3,6 +3,8 @@ name: Deploy to Hosting
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -13,11 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
-          config-file: ./.github/dependency-review.yml
 
       - run: npm ci
 
@@ -36,9 +33,18 @@ jobs:
           BUILD_SIZE=$(du -s dist/ | cut -f1)
           echo "Build size: ${BUILD_SIZE}KB"
 
-  build-deploy:
+  dependency-review:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+  build-deploy:
     needs: security
+    runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +76,7 @@ jobs:
           MAX_RETRIES=3
           RETRY_DELAY=10
           SITE_URL=${{ vars.SITE_URL || secrets.DOMAIN }}
-          
+
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES..."
             HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL" --max-time 30)
@@ -81,6 +87,6 @@ jobs:
             echo "✗ Got HTTP $HTTP_CODE, retrying in ${RETRY_DELAY}s..."
             sleep $RETRY_DELAY
           done
-          
+
           echo "✗ Health check failed after $MAX_RETRIES attempts"
           exit 1
