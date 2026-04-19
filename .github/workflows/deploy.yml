@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   security:
-    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -54,7 +53,6 @@ jobs:
 
   build-deploy:
     needs: security
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment: production
     steps:
