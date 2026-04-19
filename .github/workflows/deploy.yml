@@ -12,6 +12,7 @@ jobs:
   security:
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +28,9 @@ jobs:
 
       - name: Build size check
         run: |
+          WP_DOMAIN=${{ vars.WP_DOMAIN }}
+          WP_API_CUSTOM=${{ vars.WP_API_CUSTOM }}
+          DOMAIN=${{ vars.DOMAIN }}
           npm run build
           du -sh dist/
           BUILD_SIZE=$(du -s dist/ | cut -f1)
@@ -61,6 +65,7 @@ jobs:
       - run: npm run build
         env:
           WP_DOMAIN: ${{ vars.WP_DOMAIN }}
+          WP_API_CUSTOM: ${{ vars.WP_API_CUSTOM }}
           DOMAIN: ${{ vars.DOMAIN }}
 
       - uses: SamKirkland/FTP-Deploy-Action@v4.3.6
