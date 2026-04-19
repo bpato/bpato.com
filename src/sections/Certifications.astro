@@ -1,0 +1,16 @@
+---
+import { getCollection } from "astro:content";
+import CertificationsGrid from "@/components/Certifications/CertificationsGrid.astro";
+
+const certifications = await getCollection("certifications");
+
+if (certifications.length === 0) {
+  return;
+}
+---
+
+<section id="certifications" class="bg-white pt-8 pb-20">
+  <div class="container mx-auto px-6">
+    <CertificationsGrid {certifications} />
+  </div>
+</section>

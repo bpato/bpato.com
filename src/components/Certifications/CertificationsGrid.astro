@@ -1,0 +1,46 @@
+---
+import CertificationCard from "./CertificationCard.astro";
+
+export type Props = {
+  certifications: {
+    data: {
+      id: string;
+      name: string;
+      imageUrl: string;
+      href?: string | null;
+      order: number;
+      category: string;
+      shape?: "circle" | "square";
+    };
+  }[];
+};
+
+const { certifications } = Astro.props;
+
+const sortedCertifications = [...certifications].sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const cols = {
+  1: "max-w-xs",
+  2: "max-w-2xl",
+  3: "max-w-4xl",
+  4: "max-w-6xl",
+};
+const maxWidth = cols[sortedCertifications.length as keyof typeof cols] || "max-w-6xl";
+---
+
+<div
+  class={`flex flex-wrap justify-center gap-4 mx-auto ${maxWidth}`}
+>
+  {
+    sortedCertifications.map((cert) => (
+      <CertificationCard
+        imageUrl={cert.data.imageUrl}
+        name={cert.data.name}
+        href={cert.data.href}
+        shape={cert.data.shape}
+      />
+    ))
+  }
+</div>

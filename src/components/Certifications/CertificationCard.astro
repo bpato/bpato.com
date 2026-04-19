@@ -1,0 +1,59 @@
+---
+export type Props = {
+  imageUrl: string;
+  name: string;
+  href?: string | null;
+  shape?: "circle" | "square";
+};
+
+const { imageUrl, name, href, shape = "circle" } = Astro.props;
+
+const isCircle = shape === "circle";
+const roundedClass = isCircle ? "rounded-full" : "";
+const gradientClass = isCircle
+  ? "bg-gradient-to-br from-transparent via-transparent to-black/15"
+  : "";
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={`certification-card relative inline-flex items-center justify-center w-28 h-28 transition-transform duration-200 hover:scale-110 focus:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:ring-offset-theme-black ${roundedClass}`}
+      aria-label={`View ${name} certification`}
+      title={name}
+    >
+      {isCircle && (
+        <span
+          class={`absolute inset-0 pointer-events-none ${roundedClass} ${gradientClass}`}
+        ></span>
+      )}
+      <img
+        src={imageUrl}
+        alt={name}
+        class="h-24 w-auto object-contain relative z-10"
+        loading="lazy"
+      />
+    </a>
+  ) : (
+    <div
+      class={`relative inline-flex items-center justify-center w-28 h-28 ${roundedClass}`}
+      aria-label={name}
+      title={name}
+    >
+      {isCircle && (
+        <span
+          class={`absolute inset-0 pointer-events-none ${roundedClass} ${gradientClass}`}
+        ></span>
+      )}
+      <img
+        src={imageUrl}
+        alt={name}
+        class="h-24 w-auto object-contain relative z-10"
+        loading="lazy"
+      />
+    </div>
+  )
+}
