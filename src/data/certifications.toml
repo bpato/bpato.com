@@ -1,0 +1,17 @@
+[[certifications]]
+id = "cisco-certified-support-technician-cybersecurity"
+name = "Cisco Certified Support Technician Cybersecurity (CCST Cybersecurity)"
+imageUrl = "/images/certifications/cisco-certified-support-technician-cybersecurity-cc.3.png"
+href = "https://www.credly.com/badges/81e5a3ac-d4d0-443d-83c1-d9a65a40e9a2/public_url"
+order = 1
+category = "cybersecurity"
+shape = "circle"
+
+[[certifications]]
+id = "junior-cybersecurity-analyst-career-path"
+name = "Junior Cybersecurity Analyst Career Path"
+imageUrl = "/images/certifications/junior-cybersecurity-analyst-career-path.1.png"
+href = "https://www.credly.com/badges/cc488d22-e7c7-4358-8c92-bd798fd64919/public_url"
+order = 2
+category = "cybersecurity"
+shape = "square"

@@ -25,5 +25,18 @@ const badges = defineCollection({
     })
 })
 
+const certifications = defineCollection({
+    loader: file("./src/data/certifications.toml", { parser: (text) => parseToml(text).certifications }),
+    schema: z.object({
+        id: z.string(),
+        name: z.string(),
+        imageUrl: z.string(),
+        href: z.string().url().nullable(),
+        order: z.number().default(999),
+        category: z.string().default("general"),
+        shape: z.enum(['circle', 'square']).default('circle')
+    })
+})
+
 // 4. Export a single `collections` object to register your collection(s)
-export const collections = { projects, badges };
+export const collections = { projects, badges, certifications };
