@@ -60,8 +60,8 @@ jobs:
 
       - run: npm run build
         env:
-          WP_DOMAIN: ${{ secrets.WP_DOMAIN }}
-          DOMAIN: ${{ secrets.DOMAIN }}
+          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
+          DOMAIN: ${{ vars.DOMAIN }}
 
       - uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
@@ -69,13 +69,13 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
 
       - name: Health check
         run: |
           MAX_RETRIES=3
           RETRY_DELAY=10
-          SITE_URL=${{ vars.SITE_URL || secrets.DOMAIN }}
+          SITE_URL=${{ vars.DOMAIN }}
 
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES..."
