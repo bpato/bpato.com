@@ -1,55 +1,84 @@
-import { isURL, isValidPath, prependHTTPS } from '@wordpress/url';
+import { isValidPath } from '@wordpress/url'
 
 const WP_DOMAIN = import.meta.env.WP_DOMAIN
 const WP_API_CUSTOM = import.meta.env.WP_API_CUSTOM
 
-const isValidUrl = (url: string | undefined): boolean => {
-    if (!url || url === 'your-wordpress-site.com') return false
+/**
+ * Normaliza y valida el dominio
+ */
+const normalizeDomain = (url: string | undefined): string | null => {
+    if (!url) return null
+
+    let domain = url.trim()
+
+    // asegurar protocolo
+    if (!domain.startsWith('http')) {
+        domain = `https://${domain}`
+    }
+
     try {
-        new URL(url.startsWith('http') ? url : `https://${url}`)
-        return true
+        new URL(domain)
+        return domain
     } catch {
-        return false
+        return null
     }
 }
 
-const domain = isValidUrl(WP_DOMAIN) 
-    ? (! isURL(WP_DOMAIN) ? prependHTTPS(WP_DOMAIN) : WP_DOMAIN)
-    : null
+const domain = normalizeDomain(WP_DOMAIN)
 
-const rootUrl = domain && WP_API_CUSTOM
-    ? (! isValidPath(WP_API_CUSTOM) ? `${domain}graphql/` : `${domain}${WP_API_CUSTOM}`)
-    : null
+/**
+ * Construcción segura del endpoint
+ */
+const rootUrl = (() => {
+    if (!domain || !WP_API_CUSTOM) return null
+
+    const apiPath = WP_API_CUSTOM.trim()
+
+    // no asumir graphql por defecto
+    const finalPath = isValidPath(apiPath) ? apiPath : null
+
+    if (!finalPath) return null
+
+    return `${domain.replace(/\/$/, '')}/${finalPath.replace(/^\/+/, '')}`
+})()
 
 export interface gqlParams {
-    query: String
+    query: string
     variables?: object
 }
 
-export async function wpquery({ query, variables = {}}: gqlParams): Promise<any> {
+export async function wpquery({ query, variables = {} }: gqlParams): Promise<any> {
     if (!rootUrl) {
-        console.warn('WP_DOMAIN not configured, returning empty data')
+        console.warn('WP config missing, returning empty data')
+
+        console.log('WP_DOMAIN raw:', WP_DOMAIN)
+        console.log('WP_API_CUSTOM raw:', WP_API_CUSTOM)
+        console.log('domain parsed:', domain)
+        console.log('rootUrl:', rootUrl)
+
         const q = query.toLowerCase()
+
         if (q.includes('pages')) return { pages: { nodes: [] } }
         if (q.includes('posts')) return { posts: { nodes: [] } }
         if (q.includes('postby')) return { postBy: null }
+
         return {}
     }
 
     const response = await fetch(rootUrl, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             query,
-            variables
-        })
+            variables,
+        }),
     })
 
     if (!response.ok) {
-        console.error(response)
-        throw new Error("Failed to fetch page info");
+        console.error('GraphQL error:', response)
+        throw new Error('Failed to fetch page info')
     }
 
     const { data } = await response.json()
