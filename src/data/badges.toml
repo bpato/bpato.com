@@ -65,3 +65,19 @@ imageUrl = "https://img.shields.io/badge/CLI-ffdf6c"
 [[badges]]
 id = "gui"
 imageUrl = "https://img.shields.io/badge/GUI-ffdf6c"
+
+[[badges]]
+id = "react"
+imageUrl = "https://img.shields.io/badge/React-61DAFB.svg?logo=react&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "vite"
+imageUrl = "https://img.shields.io/badge/Vite-646CFF.svg?logo=vite&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "javascript"
+imageUrl = "https://img.shields.io/badge/JavaScript-F7DF1E.svg?logo=javascript&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "canvas-confetti"
+imageUrl = "https://img.shields.io/badge/canvas-confetti-ffdf6c"
