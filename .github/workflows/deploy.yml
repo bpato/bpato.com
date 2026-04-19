@@ -26,11 +26,18 @@ jobs:
       - name: TypeScript check
         run: npm run check
 
+      - run: npm run build
+        env:
+          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
+          WP_API_CUSTOM: ${{ vars.WP_API_CUSTOM }}
+          DOMAIN: ${{ vars.DOMAIN }}
+
       - name: Build size check
+        env:
+          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
+          WP_API_CUSTOM: ${{ vars.WP_API_CUSTOM }}
+          DOMAIN: ${{ vars.DOMAIN }}
         run: |
-          WP_DOMAIN=${{ vars.WP_DOMAIN }}
-          WP_API_CUSTOM=${{ vars.WP_API_CUSTOM }}
-          DOMAIN=${{ vars.DOMAIN }}
           npm run build
           du -sh dist/
           BUILD_SIZE=$(du -s dist/ | cut -f1)
