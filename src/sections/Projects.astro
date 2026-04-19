@@ -5,6 +5,12 @@ import ProjectCard from "@/components/ProjectCard.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
+
+const sortedProjects = allProjects.sort((a, b) => {
+  const numA = parseInt(a.id.split('_')[0]);
+  const numB = parseInt(b.id.split('_')[0]);
+  return numA - numB;
+});
 ---
 
 <section id="projects" class="m:h-[60vh] py-12 relative">
@@ -30,6 +36,6 @@ const allProjects = await getCollection("projects");
   <div
     class="container mx-auto flex flex-row justify-around flex-wrap gap-0.5 mt-12"
   >
-    {allProjects.map((project) => <ProjectCard {project} />)}
+    {sortedProjects.map((project) => <ProjectCard {project} />)}
   </div>
 </section>
