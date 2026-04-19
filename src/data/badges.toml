@@ -49,3 +49,19 @@ imageUrl = "https://img.shields.io/badge/PHPUnit-ffdf6c"
 [[badges]]
 id = "openapi"
 imageUrl = "https://img.shields.io/badge/openapiinitiative-%23000000.svg?logo=openapiinitiative&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "python"
+imageUrl = "https://img.shields.io/badge/Python-3776AB.svg?logo=python&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "qt"
+imageUrl = "https://img.shields.io/badge/Qt-41CD52.svg?logo=qt&logoColor=202020&color=ffdf6c"
+
+[[badges]]
+id = "cli"
+imageUrl = "https://img.shields.io/badge/CLI-ffdf6c"
+
+[[badges]]
+id = "gui"
+imageUrl = "https://img.shields.io/badge/GUI-ffdf6c"
