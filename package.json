@@ -2,6 +2,9 @@
   "name": "astro",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -22,6 +25,7 @@
     "aos": "^2.3.4",
     "astro": "^5.11.0",
     "astro-social-share": "^2.2.0",
+    "dotenv": "^17.4.2",
     "tailwindcss": "^4.1.11",
     "toml": "^4.1.1"
   },
@@ -32,6 +36,7 @@
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.7.0",
-    "prettier": "^3.8.3"
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   }
 }
