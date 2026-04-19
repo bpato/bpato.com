@@ -1,7 +1,7 @@
 name: Deploy to Hosting
 
 on:
-  pull_request:
+  push:
     branches: [master]
   workflow_dispatch:
 
@@ -10,49 +10,8 @@ permissions:
 
 jobs:
   security:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - uses: actions/checkout@v4
-
-      - run: npm ci
-
-      - run: npm audit --audit-level=high
-
-      - name: ESLint
-        run: npm run lint
-
-      - name: TypeScript check
-        run: npm run check
-
-      - run: npm run build
-        env:
-          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
-          WP_API_CUSTOM: ${{ vars.WP_API_CUSTOM }}
-          DOMAIN: ${{ vars.DOMAIN }}
-
-      - name: Build size check
-        env:
-          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
-          WP_API_CUSTOM: ${{ vars.WP_API_CUSTOM }}
-          DOMAIN: ${{ vars.DOMAIN }}
-        run: |
-          npm run build
-          du -sh dist/
-          BUILD_SIZE=$(du -s dist/ | cut -f1)
-          echo "Build size: ${BUILD_SIZE}KB"
-
-  dependency-review:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
-
+    uses: ./.github/workflows/ci.yml
   build-deploy:
-    needs: security
     runs-on: ubuntu-latest
     environment: production
     steps:
