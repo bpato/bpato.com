@@ -99,8 +99,13 @@ const validateContentType = async (response: Response): Promise<void> => {
     if (!contentType.includes('application/json')) {
         const errorText = await response.text()
         console.error('WP API returned non-JSON content')
+        console.error('Status:', response.status, response.statusText)
         console.error('Content-Type:', contentType)
-        console.error('Response:', errorText)
+        console.error('Headers:', {
+            'content-type': contentType,
+            'content-length': response.headers.get('content-length'),
+        })
+        console.error('Response body:', errorText || '(empty)')
         throw new Error('WP API returned non-JSON response')
     }
 }
@@ -138,6 +143,8 @@ const performRequest = async (
     query: string,
     variables: object,
 ): Promise<any> => {
+    console.log('WP API request to:', url)
+    
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -146,6 +153,8 @@ const performRequest = async (
         },
         body: JSON.stringify({ query, variables }),
     })
+
+    console.log('WP API response status:', response.status, response.statusText)
 
     await validateContentType(response)
 
