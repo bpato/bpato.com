@@ -48,7 +48,7 @@ export interface GqlParams {
 }
 
 const MAX_RETRIES = 3
-const INITIAL_DELAY = 1000
+const INITIAL_DELAY = 5000  // 5 segundos inicial
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -62,11 +62,12 @@ const shouldRetry = (status: number) => {
 
 /**
  * Calcula el delay para el reintento usando exponential backoff con jitter.
- * Formula: INITIAL_DELAY * 2^attempt ± 10% (jitter aleatorio)
+ * Formula: INITIAL_DELAY * 4^attempt ± 10% (jitter aleatorio)
+ * Delays: 5s → 20s → 80s
  * El jitter evita que múltiples requests reinten simultáneamente (thundering herd)
  */
 const getBackoffDelay = (attempt: number): number => {
-    const exponentialDelay = INITIAL_DELAY * Math.pow(2, attempt)
+    const exponentialDelay = INITIAL_DELAY * Math.pow(4, attempt)
     // Agregar jitter (±10%) para evitar thundering herd
     const jitter = exponentialDelay * 0.1 * (Math.random() * 2 - 1)
     return Math.max(INITIAL_DELAY, exponentialDelay + jitter)
@@ -162,7 +163,8 @@ const performRequest = async (
         const status = response.status
         const errorText = await response.text()
         console.error(`WP API error ${status}: ${response.statusText}`)
-        console.error('Response:', errorText)
+        console.error('Headers:', Object.fromEntries(response.headers.entries()))
+        console.error('Response body:', errorText || '(empty)')
         throw new Error(`WP API error: ${status} ${response.statusText}`)
     }
 
