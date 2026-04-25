@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import { wpquery, type gqlParams } from "@/lib/wpQuery";
+import { wpQuery, type GqlParams } from "@/lib/wpQuery";
 import { Post } from "@/lib/wpResources";
 import { formatDate } from "@/lib/utils/format";
 import PageWrapper from "@/components/PageWrapper.astro";
@@ -22,7 +22,7 @@ const { postSlug: slug } = Astro.params;
 if (!slug) return Astro.redirect("/404");
 
 export const getStaticPaths = (() => {
-  const data = wpquery({
+  const data = wpQuery({
     query: Post.ALL_SLUG,
   });
 
@@ -33,10 +33,10 @@ export const getStaticPaths = (() => {
   });
 }) satisfies GetStaticPaths;
 
-const { postBy: post } = await wpquery({
+const { postBy: post } = await wpQuery({
   query: Post.BY_SLUG,
   variables: { slug },
-} satisfies gqlParams);
+} satisfies GqlParams);
 
 const {
   excerpt,

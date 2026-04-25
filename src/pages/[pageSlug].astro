@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import { wpquery } from "@/lib/wpQuery";
+import { wpQuery } from "@/lib/wpQuery";
 import { Page } from "@/lib/wpResources";
 import PageWrapper from "@/components/PageWrapper.astro";
 import Breadcrumb, {
@@ -28,7 +28,7 @@ const { slug: pageSlug } = Astro.params;
 const { title, content, seo } = Astro.props;
 
 export const getStaticPaths = (() => {
-  const data = wpquery({
+  const data = wpQuery({
     query: Page.NODES,
   });
 
