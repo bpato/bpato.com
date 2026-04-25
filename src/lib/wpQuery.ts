@@ -77,10 +77,18 @@ export async function wpquery({ query, variables = {} }: gqlParams): Promise<any
     })
 
     if (!response.ok) {
-        console.error('GraphQL error:', response)
-        throw new Error('Failed to fetch page info')
+        const errorText = await response.text()
+        const preview = errorText.substring(0, 500)
+        console.error(`WP API error ${response.status}: ${response.statusText}`)
+        console.error('Response preview:', preview)
+        throw new Error(`WP API error: ${response.status} ${response.statusText}`)
     }
 
-    const { data } = await response.json()
-    return data
+    try {
+        const { data } = await response.json()
+        return data
+    } catch (e) {
+        console.error('Invalid JSON response from WP API - server may be down')
+        throw e
+    }
 }
