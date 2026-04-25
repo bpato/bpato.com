@@ -47,8 +47,8 @@ export interface GqlParams {
     variables?: object
 }
 
-const MAX_RETRIES = 3
-const INITIAL_DELAY = 5000  // 5 segundos inicial
+const MAX_RETRIES = 5
+const INITIAL_DELAY = 10000  // 10 segundos inicial (aumentado de 5s)
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -62,15 +62,18 @@ const shouldRetry = (status: number) => {
 
 /**
  * Calcula el delay para el reintento usando exponential backoff con jitter.
- * Formula: INITIAL_DELAY * 4^attempt ± 10% (jitter aleatorio)
- * Delays: 5s → 20s → 80s
+ * Distribuye 5 intentos con máximo de 5 minutos en el último.
+ * Formula: (INITIAL_DELAY * 2^attempt) capped a 5 minutos
+ * Delays: 10s → 20s → 40s → 80s → 300s (5 minutos)
  * El jitter evita que múltiples requests reinten simultáneamente (thundering herd)
  */
 const getBackoffDelay = (attempt: number): number => {
-    const exponentialDelay = INITIAL_DELAY * Math.pow(4, attempt)
+    const maxDelay = 5 * 60 * 1000  // 5 minutos
+    const exponentialDelay = INITIAL_DELAY * Math.pow(2, attempt)
+    const cappedDelay = Math.min(exponentialDelay, maxDelay)
     // Agregar jitter (±10%) para evitar thundering herd
-    const jitter = exponentialDelay * 0.1 * (Math.random() * 2 - 1)
-    return Math.max(INITIAL_DELAY, exponentialDelay + jitter)
+    const jitter = cappedDelay * 0.1 * (Math.random() * 2 - 1)
+    return Math.max(INITIAL_DELAY, cappedDelay + jitter)
 }
 
 /**
@@ -151,6 +154,7 @@ const performRequest = async (
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Astro-Build/1.0',
         },
         body: JSON.stringify({ query, variables }),
     })
