@@ -9,7 +9,7 @@ const allProjects = await getCollection("projects");
 const sortedProjects = allProjects.sort((a, b) => {
   const numA = parseInt(a.id.split('_')[0]);
   const numB = parseInt(b.id.split('_')[0]);
-  return numA - numB;
+  return numB - numA;
 });
 ---
 
