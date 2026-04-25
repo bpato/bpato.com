@@ -1,12 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import PageWrapper from "@/components/PageWrapper.astro";
-import { wpquery } from "@/lib/wpQuery";
+import { wpQuery } from "@/lib/wpQuery";
 import { Post } from "@/lib/wpResources";
 import BlogHeader from "@/components/Blog/BlogHeader.astro";
 import BlogGrid from "@/components/Blog/BlogGrid.astro";
 
-const { posts } = await wpquery({
+const { posts } = await wpQuery({
   query: Post.NODES,
 });
 ---
