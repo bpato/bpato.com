@@ -94,9 +94,13 @@ const getEmptyData = (query: string): object => {
  * @param response - Response object del fetch
  * @throws Error si no es JSON
  */
-const validateContentType = (response: Response): void => {
+const validateContentType = async (response: Response): Promise<void> => {
     const contentType = response.headers.get('content-type') || ''
     if (!contentType.includes('application/json')) {
+        const errorText = await response.text()
+        console.error('WP API returned non-JSON content')
+        console.error('Content-Type:', contentType)
+        console.error('Response:', errorText)
         throw new Error('WP API returned non-JSON response')
     }
 }
@@ -143,7 +147,7 @@ const performRequest = async (
         body: JSON.stringify({ query, variables }),
     })
 
-    validateContentType(response)
+    await validateContentType(response)
 
     if (!response.ok) {
         const status = response.status
