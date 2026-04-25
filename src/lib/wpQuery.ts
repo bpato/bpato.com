@@ -69,6 +69,7 @@ export async function wpquery({ query, variables = {} }: gqlParams): Promise<any
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
         },
         body: JSON.stringify({
             query,
@@ -76,11 +77,19 @@ export async function wpquery({ query, variables = {} }: gqlParams): Promise<any
         }),
     })
 
+    const contentType = response.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+        const errorText = await response.text()
+        console.error('WP API returned non-JSON content')
+        console.error('Content-Type:', contentType)
+        console.error('Response:', errorText)
+        throw new Error('WP API returned non-JSON response')
+    }
+
     if (!response.ok) {
         const errorText = await response.text()
-        const preview = errorText.substring(0, 500)
         console.error(`WP API error ${response.status}: ${response.statusText}`)
-        console.error('Response preview:', preview)
+        console.error('Response:', errorText)
         throw new Error(`WP API error: ${response.status} ${response.statusText}`)
     }
 
@@ -88,7 +97,9 @@ export async function wpquery({ query, variables = {} }: gqlParams): Promise<any
         const { data } = await response.json()
         return data
     } catch (e) {
+        const errorText = await response.text()
         console.error('Invalid JSON response from WP API - server may be down')
+        console.error('Response:', errorText)
         throw e
     }
 }
