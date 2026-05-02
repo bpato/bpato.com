@@ -6,6 +6,7 @@ export type Prop = {
   dateGmt: string;
   featuredImage: boolean;
   edges: { tags: string[] };
+  variant?: "featured" | "standard" | "compact";
 };
 
 const {
@@ -15,6 +16,7 @@ const {
   dateGmt,
   featuredImage: img = false,
   tags: { edges: tags },
+  variant = "standard",
 } = Astro.props;
 
 const date = new Date(dateGmt).toLocaleDateString("en-US", {
@@ -22,49 +24,59 @@ const date = new Date(dateGmt).toLocaleDateString("en-US", {
   day: "numeric",
   year: "numeric",
 });
+
+const titleSize = {
+  featured: "text-2xl md:text-4xl",
+  standard: "text-lg md:text-2xl",
+  compact: "text-base md:text-xl",
+}[variant];
+
+const padding = {
+  featured: "p-6 md:p-8",
+  standard: "p-5",
+  compact: "p-4",
+}[variant];
 ---
 
-<article class="blog-card bg-theme-black my-2 z-0">
-  <a class="read-more" href=`/post/${slug}` data-astro-history="replace">
-    <div class="blog-card-flex flex flex-col-reverse md:flex-row p-6">
-      <div class="card-body text-theme-grey-medium flex-1">
-        <div class="flex flex-col p-6 h-full">
-          <div class="card-date text-xs md:text-sm font-medium mb-6">
-            <time>{date}</time>
-          </div>
-          <div class="card-title mb-2 text-white">
-            <h3 class="title text-lg md:text-4xl font-semibold">{title}</h3>
-          </div>
-          <div class="divider"></div>
-          <div
-            class="card-excerpt text-white text-base md:text-xl min-h-24 h-full flex justify-between flex-col mb-2"
-          >
-            <div
-              class="paragraph text-justify leading-normal font-light"
-              set:html={excerpt}
-            />
-          </div>
-          <div class="text-sm">
-            <p class="tagline">
-              {
-                tags.length > 0 &&
-                  tags.map(({ node }: any) => <span>{node.name} </span>)
-              }
-            </p>
-          </div>
+<article class="blog-card group bg-theme-black z-0 overflow-hidden transition-all duration-300 hover:shadow-[0_0_0_1px_var(--color-primary-light),0_8px_24px_rgba(0,0,0,0.3)]" data-variant={variant}>
+  <a class="read-more block" href={`/post/${slug}`} data-astro-history="replace">
+    {
+      img && (
+        <div class="media relative overflow-hidden">
+          <img
+            class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            src={img.node.sourceUrl}
+            alt={img.node.altText}
+            srcset={img.node.srcSet}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          />
         </div>
-      </div>
-      <div
-        class="media grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible flex-1"
-      >
+      )
+    }
+    <div class={`card-body text-theme-grey-medium ${padding}`}>
+      <div class="flex flex-col h-full">
+        <div class="card-date text-xs font-medium mb-3 text-primary-light">
+          <time>{date}</time>
+        </div>
+        <div class="card-title mb-3 text-white">
+          <h3 class={`title ${titleSize} font-semibold transition-colors duration-300 group-hover:text-primary-light`}>{title}</h3>
+        </div>
+        <div class="divider border-t border-theme-grey-dark my-3"></div>
+        <div class="card-excerpt text-white flex-1 mb-3">
+          <div
+            class="paragraph text-justify leading-normal font-light"
+            set:html={excerpt}
+          />
+        </div>
         {
-          img && (
-            <img
-              class="object-cover object-center w-full h-50 md:h-96"
-              src={img.node.sourceUrl}
-              alt={img.node.altText}
-              srcset={img.node.srcSet}
-            />
+          tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-auto pt-2">
+              {tags.map(({ node }: any) => (
+                <span class="tag-badge inline-block bg-primary-light/10 text-primary-light text-xs font-medium px-2.5 py-1 rounded-full transition-colors duration-300 group-hover:bg-primary-light/20">
+                  {node.name}
+                </span>
+              ))}
+            </div>
           )
         }
       </div>
