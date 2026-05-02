@@ -73,7 +73,7 @@ const sizeBack = img ? "h-[85%] md:h-[35%] xl:h-[60%]" : "h-[360px]";
       title={title}
       class="mx-auto max-w-2xl p-4 lg:max-w-6xl z-10 relative"
     >
-      <header class="container mx-auto max-w-lg text-center">
+      <header class="container mx-auto max-w-xl text-center">
         <h1 class="font-bold text-4xl" set:html={title} />
         <div class="my-4 text-primary-light">
           <Fragment set:html={excerpt} />
@@ -85,7 +85,7 @@ const sizeBack = img ? "h-[85%] md:h-[35%] xl:h-[60%]" : "h-[360px]";
           <time>{date}</time>
         </div>
       </header>
-      <div class="container mx-auto max-w-xl">
+      <div class="container mx-auto max-w-2xl">
         {
           img && (
             <img
@@ -97,10 +97,10 @@ const sizeBack = img ? "h-[85%] md:h-[35%] xl:h-[60%]" : "h-[360px]";
           )
         }
       </div>
-      <WPContent class="container mx-auto py-6 max-w-lg text-theme-black">
+      <WPContent class="container mx-auto py-6 max-w-3xl text-theme-black">
         <Fragment set:html={content} />
       </WPContent>
-      <div class="container mx-auto py-6 max-w-xl text-theme-black">
+      <div class="container mx-auto py-6 max-w-2xl text-theme-black">
         <p>SHARE:</p>
         <SocialShare
           buttons={[
