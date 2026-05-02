@@ -21,7 +21,7 @@
     "@fontsource-variable/nunito": "^5.2.6",
     "@fontsource/permanent-marker": "^5.2.6",
     "@tailwindcss/vite": "^4.2.4",
-    "@wordpress/url": "^4.44.0",
+    "@wordpress/url": "^4.45.0",
     "aos": "^2.3.4",
     "astro": "^5.11.0",
     "astro-social-share": "^2.2.0",
