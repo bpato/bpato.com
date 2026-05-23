@@ -16,14 +16,14 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.1",
-    "@astrojs/ts-plugin": "^1.10.4",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/ts-plugin": "^1.10.9",
     "@fontsource-variable/nunito": "^5.2.6",
     "@fontsource/permanent-marker": "^5.2.6",
     "@tailwindcss/vite": "^4.3.0",
     "@wordpress/url": "^4.45.0",
     "aos": "^2.3.4",
-    "astro": "^5.11.0",
+    "astro": "^6.3.7",
     "astro-social-share": "^2.2.0",
     "dotenv": "^17.4.2",
     "tailwindcss": "^4.1.11",
