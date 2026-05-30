@@ -30,10 +30,10 @@
     "toml": "^4.1.1"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.474",
+    "@iconify/json": "^2.2.481",
     "@iconify/tailwind4": "^1.0.6",
-    "@typescript-eslint/parser": "^8.59.3",
-    "eslint": "^10.4.0",
+    "@typescript-eslint/parser": "^8.60.0",
+    "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.7.0",
     "prettier": "^3.8.3",
