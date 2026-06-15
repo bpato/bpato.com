@@ -29,6 +29,10 @@
     "tailwindcss": "^4.1.11",
     "toml": "^4.1.1"
   },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "vite": "^7.0.0"
+  },
   "devDependencies": {
     "@iconify/json": "^2.2.486",
     "@iconify/tailwind4": "^1.0.6",
