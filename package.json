@@ -34,13 +34,13 @@
     "vite": "^7.0.0"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.488",
+    "@iconify/json": "^2.2.495",
     "@iconify/tailwind4": "^1.0.6",
-    "@typescript-eslint/parser": "^8.61.1",
-    "eslint": "^10.5.0",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-astro": "^1.7.0",
-    "prettier": "^3.8.4",
+    "eslint-plugin-astro": "^2.1.1",
+    "prettier": "^3.9.4",
     "typescript": "^6.0.3"
   }
 }
