@@ -20,14 +20,14 @@
     "@astrojs/ts-plugin": "^1.10.10",
     "@fontsource-variable/nunito": "^5.2.6",
     "@fontsource/permanent-marker": "^5.2.6",
-    "@tailwindcss/vite": "^4.3.2",
-    "@wordpress/url": "^4.50.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@wordpress/url": "^4.51.0",
     "aos": "^2.3.4",
     "astro": "^6.3.7",
     "astro-social-share": "^2.2.0",
     "dotenv": "^17.4.2",
     "tailwindcss": "^4.1.11",
-    "toml": "^4.1.2"
+    "toml": "^5.0.0"
   },
   "overrides": {
     "esbuild": "^0.28.1",
