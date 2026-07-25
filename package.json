@@ -34,10 +34,10 @@
     "sharp": "^0.35.3"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.504",
+    "@iconify/json": "^2.2.505",
     "@iconify/tailwind4": "^1.0.6",
     "@typescript-eslint/parser": "^8.65.0",
-    "eslint": "^10.7.0",
+    "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.0.1",
     "prettier": "^3.9.6",
