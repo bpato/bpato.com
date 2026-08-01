@@ -34,7 +34,7 @@
     "sharp": "^0.35.3"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.505",
+    "@iconify/json": "^2.2.507",
     "@iconify/tailwind4": "^1.0.6",
     "@typescript-eslint/parser": "^8.65.0",
     "eslint": "^10.8.0",
